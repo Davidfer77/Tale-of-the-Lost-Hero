@@ -1,0 +1,130 @@
+from enum import Enum
+import random
+from importlib import resources
+import pygame
+from TotLH.entities.gameobject import GameObject
+from TotLH.entities.reusableobject import ReusableObject
+from TotLH.config import cfg_item
+from TotLH.events import Events
+
+
+class EnemyType(Enum):
+    Skeleton = 0,
+    Predator = 1,
+    Shadow = 2,
+    Devil = 3
+
+class Enemy(GameObject, ReusableObject):
+
+    __skeleton_image = None
+    __predator_image = None
+    __shadow_image = None
+    __devil_image = None
+
+    def __init__(self):
+        super().__init__()
+        #self.__load_image(Enemy.__skeleton_image, "skeleton")
+        #self.__load_image(Enemy.__predator_image, "predator")
+        #self.__load_image(Enemy.__shadow_image, "shadow")
+        #self.__load_image(Enemy.__devil_image, "devil")
+        if Enemy.__skeleton_image is None:
+            with resources.path(cfg_item("enemy", "skeleton", "image", "path"), cfg_item("enemy", "skeleton", "image", "filename")) as image_path:
+                __raw_image = pygame.image.load(image_path).convert_alpha()
+                Enemy.__skeleton_image = pygame.transform.scale(__raw_image, cfg_item("enemy", "skeleton", "image", "size")).convert_alpha()
+        if Enemy.__predator_image is None:
+            with resources.path(cfg_item("enemy", "predator", "image", "path"), cfg_item("enemy", "predator", "image", "filename")) as image_path:
+                __raw_image = pygame.image.load(image_path).convert_alpha()
+                Enemy.__predator_image = pygame.transform.scale(__raw_image, cfg_item("enemy", "predator", "image", "size")).convert_alpha()
+        if Enemy.__shadow_image is None:
+            with resources.path(cfg_item("enemy", "shadow", "image", "path"), cfg_item("enemy", "shadow", "image", "filename")) as image_path:
+                __raw_image = pygame.image.load(image_path).convert_alpha()
+                Enemy.__shadow_image = pygame.transform.scale(__raw_image, cfg_item("enemy", "shadow", "image", "size")).convert_alpha()
+        if Enemy.__devil_image is None:
+            with resources.path(cfg_item("enemy", "devil", "image", "path"), cfg_item("enemy", "devil", "image", "filename")) as image_path:
+                __raw_image = pygame.image.load(image_path).convert_alpha()
+                Enemy.__devil_image = pygame.transform.scale(__raw_image, cfg_item("enemy", "devil", "image", "size")).convert_alpha()
+
+        self.__moving = {
+            "left" : False,
+            "right" : False,
+            "up" : False,
+            "down" : False
+        }
+
+    #def __load_image(self, image, enemy_str):
+    #    if image is None:
+    #        with resources.path(cfg_item("enemy",enemy_str, "image", "path"), cfg_item("enemy",enemy_str, "image", "filename")) as image_path:
+    #            __raw_image = pygame.image.load(image_path).convert_alpha()
+    #            image = pygame.transform.scale(__raw_image, cfg_item("enemy",enemy_str, "image", "size")).convert_alpha()
+
+
+    def __load_data(self, enemy_str): 
+        self.__speed = cfg_item("enemy", enemy_str, "stats", "speed")
+        self.__life = cfg_item("enemy", enemy_str, "stats", "life")
+        self.__damage = cfg_item("enemy", enemy_str, "stats", "damage")
+
+    def reset(self):
+        self.__enemy_type = None
+        self._pos = pygame.math.Vector2(0.0, 0.0)
+
+    def init(self, enemy_type, spawn_point):
+        self.__enemy_type = enemy_type
+        self._pos = spawn_point
+
+        if enemy_type == EnemyType.Skeleton:
+            self.__load_data("skeleton")
+            self.__image = Enemy.__skeleton_image
+        elif enemy_type == EnemyType.Predator:
+            self.__load_data("predator")
+            self.__image = Enemy.__predator_image
+        elif enemy_type == EnemyType.Shadow:
+            self.__load_data("shadow")
+            self.__image = Enemy.__shadow_image
+        elif enemy_type == EnemyType.Devil:
+            self.__load_data("devil")
+            self.__image = Enemy.__devil_image
+
+    def handle_input(self, key, is_pressed):
+        pass
+
+    def handle_events(self, event):
+        pass
+
+    def update(self, delta_time):
+        self.__velocity = pygame.math.Vector2(0, self.__speed)
+        distance = self.__velocity * delta_time
+
+        if self._pos.y <= cfg_item("game", "screen_size")[1]:
+            self._pos += distance
+        else:
+            #Creamos el evento de salida de pantalla y da como parametro la propia instancia (self) para luego borrar esa instancia
+            out_of_screen_event = pygame.event.Event(pygame.USEREVENT, event = Events.ENEMY_OUT_OF_SCREEN, enemy = self)
+            #Lanzamos el evento a la cola
+            pygame.event.post(out_of_screen_event)
+        
+        #self.__fire()
+
+    def render(self, screen):
+        screen.blit(self.__image, self._pos)
+
+    #def __fire(self):
+    #    if random.random() < self.__fire_Rate:
+    #    proj_pos = pygame.math.Vector2(self._pos.x + self.__image_half_width, self._pos.y + self.__image_half_height)
+        
+    #    if self.__moving["left"] == True:
+    #        proj_pos.x -= self.__image_half_width
+    #    elif self.__moving["right"] == True:
+    #        proj_pos.x += self.__image_half_width
+    #    elif self.__moving["up"] == True:
+    #        proj_pos.y -= self.__image_half_height
+    #    elif self.__moving["down"] == True:
+    #        proj_pos.y += self.__image_half_height
+        
+   
+    #    self.__arrow_cooldown = cfg_item("projectiles","allied", "stats", "cooldown")
+    
+
+        #Creamos el evento
+    #    fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.HERO_FIRES, pos = proj_pos)
+        #Lanzamos el evento a la cola
+    #    pygame.event.post(fire_event)

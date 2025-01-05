@@ -1,0 +1,127 @@
+{
+    "game" : {
+        "fps" : 60,
+        "screen_size" : [720, 720],
+        "caption" : "Tale of the Lost Hero"
+    },
+    "scenario" : {
+        "bg_1" : {
+            "path" : "TotLH.assets.images",
+            "filename" : "background1.png", 
+            "enemy_spawn_prob" : 0.01,
+            "enemy_spawn_weight" : {
+                "skeleton" : 80,
+                "predator" : 20,
+                "shadow" : 0,
+                "devil" : 0
+            }
+        }
+    },
+    "fonts" : {
+        "intro" : {
+            "path" : "TotLH.assets.fonts",
+            "filename" : "Sketch_Gothic_School.ttf",
+            "size" : 10
+        },
+        "in_game" : {
+            "path" : "TotLH.assets.fonts",
+            "filename" : "alagard.ttf",
+            "size" : 5
+        }
+
+    },
+    "hero" : {
+        "image" : {
+            "path" : "TotLH.assets.images",
+            "filename" : "hero_try5.png",
+            "size" : [100, 100]
+        },
+        "stats" : {
+            "life" : 200,
+            "speed" : 0.25,
+            "damage" : 20
+        }
+    },
+    "enemy" : {
+        "skeleton" : {
+            "image" : {
+                "path" : "TotLH.assets.images",
+                "filename" : "skeleton.png",
+                "size" : [100, 100]
+            },
+            "stats" : {
+                "life" : 30,
+                "speed" : 0.1,
+                "damage" : 20
+            }
+        },
+        "predator" : {
+            "image" : {
+                "path" : "TotLH.assets.images",
+                "filename" : "predator.png",
+                "size" : [100, 100]
+            },
+            "stats" : {
+                "life" : 20,
+                "speed" : 0.2,
+                "damage" : 50
+            }
+        },
+        "shadow" : {
+            "image" : {
+                "path" : "TotLH.assets.images",
+                "filename" : "shadow.png",
+                "size" : [100, 100]
+            },
+            "stats" : {
+                "life" : 30,
+                "speed" : 0.05,
+                "damage" : 35
+            }
+        },
+        "devil" : {
+            "image" : {
+                "path" : "TotLH.assets.images",
+                "filename" : "final_boss.png",
+                "size" : [200, 200]
+            },
+            "stats" : {
+                "life" : 500,
+                "speed" : 0.02,
+                "damage" : 75
+            }
+        }
+
+    },
+    "projectiles" : {
+        "allied" : {
+            "image" : {
+                "path" : "TotLH.assets.images",
+                "filename" : "arrow.png",
+                "size" : [40, 40]
+            },
+            "stats" : {
+                "velocity" : [0.0, -0.4],
+                "speed" : 0.4,
+                "damage" : 20,
+                "cooldown" : 500
+            }
+        },
+        "enemy" : {
+            "image" : {
+                "path" : "TotLH.assets.images",
+                "filename" : "arrow.png",
+                "size" : [20, 20]
+            },
+            "stats" : {
+                "velocity" : [0.0, 0.4],
+                "speed" : 0.4,
+                "damage" : 20
+            }
+        }
+
+    },
+    "hi-scores" : {
+        "1" : ["Master", 5000]
+    }
+}

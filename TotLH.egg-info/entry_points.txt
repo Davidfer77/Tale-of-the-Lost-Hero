@@ -1,0 +1,2 @@
+[console_scripts]
+TotLH = TotLH.__main__:main

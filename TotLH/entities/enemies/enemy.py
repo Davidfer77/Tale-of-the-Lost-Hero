@@ -28,6 +28,8 @@ class Enemy(GameObject, ReusableObject):
         Enemy.__shadow_image = self.__load_image(Enemy.__shadow_image, "shadow")
         Enemy.__devil_image = self.__load_image(Enemy.__devil_image, "devil")
 
+        self.__fire_cooldown = 0
+
         self.__moving = {
             "left" : False,
             "right" : False,
@@ -90,7 +92,10 @@ class Enemy(GameObject, ReusableObject):
             pygame.event.post(out_of_screen_event)
         
         self.__fire()
-        
+
+        if self.__fire_cooldown >= 0.0:
+            self.__fire_cooldown -= delta_time
+
         #self.__fire()
 
     def render(self, screen):
@@ -119,7 +124,7 @@ class Enemy(GameObject, ReusableObject):
     #    pygame.event.post(fire_event)
 
     def __fire(self):
-        if random.random() <= self.__fire_rate:
+        if random.random() <= self.__fire_rate and self.__fire_cooldown <= 0.0:
             #proj_pos = pygame.math.Vector2(self._pos.x + self.__image_half_width, self._pos.y + self.__image_half_height)
             proj_pos = pygame.math.Vector2(self._pos.x , self._pos.y)
     

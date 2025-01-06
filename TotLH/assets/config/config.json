@@ -16,7 +16,29 @@
             "enemy_spawn_weight" : {
                 "skeleton" : 80,
                 "predator" : 20,
-                "shadow" : 100,
+                "shadow" : 0,
+                "devil" : 100
+            }
+        },
+        "scenario2" : {
+            "path" : "TotLH.assets.images",
+            "filename" : "background2.png", 
+            "enemy_spawn_prob" : 0.01,
+            "enemy_spawn_weight" : {
+                "skeleton" : 60,
+                "predator" : 15,
+                "shadow" : 25,
+                "devil" : 0
+            }
+        },
+        "scenario3" : {
+            "path" : "TotLH.assets.images",
+            "filename" : "bg_final2.png", 
+            "enemy_spawn_prob" : 0.01,
+            "enemy_spawn_weight" : {
+                "skeleton" : 0,
+                "predator" : 0,
+                "shadow" : 0,
                 "devil" : 100
             }
         }
@@ -106,10 +128,9 @@
                 "life" : 500,
                 "speed" : 0.02,
                 "damage" : 75,
-                "fire_rate" : 0.2
+                "fire_rate" : 0.05
             }
         }
-
     },
     "projectiles" : {
         "allied" : {

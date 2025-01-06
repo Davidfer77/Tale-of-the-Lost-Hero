@@ -12,8 +12,8 @@
             "enemy_spawn_weight" : {
                 "skeleton" : 80,
                 "predator" : 20,
-                "shadow" : 0,
-                "devil" : 0
+                "shadow" : 100,
+                "devil" : 100
             }
         }
     },
@@ -52,7 +52,8 @@
             "stats" : {
                 "life" : 30,
                 "speed" : 0.1,
-                "damage" : 20
+                "damage" : 20,
+                "fire_rate" : 0.0
             }
         },
         "predator" : {
@@ -64,7 +65,8 @@
             "stats" : {
                 "life" : 20,
                 "speed" : 0.2,
-                "damage" : 50
+                "damage" : 50,
+                "fire_rate" : 0.0
             }
         },
         "shadow" : {
@@ -76,7 +78,8 @@
             "stats" : {
                 "life" : 30,
                 "speed" : 0.05,
-                "damage" : 35
+                "damage" : 35,
+                "fire_rate" : 0.0
             }
         },
         "devil" : {
@@ -88,7 +91,8 @@
             "stats" : {
                 "life" : 500,
                 "speed" : 0.02,
-                "damage" : 75
+                "damage" : 75,
+                "fire_rate" : 0.2
             }
         }
 
@@ -116,7 +120,8 @@
             "stats" : {
                 "velocity" : [0.0, 0.4],
                 "speed" : 0.4,
-                "damage" : 20
+                "damage" : 20,
+                "cooldown" : 500
             }
         }
 

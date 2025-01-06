@@ -5,7 +5,8 @@ import pygame
 from TotLH.config import cfg_item
 from TotLH.events import Events
 from TotLH.entities.hero import Hero
-from TotLH.entities.projectiles.projectile_allied import Projectile_allied
+from TotLH.entities.projectiles.projectile_factory import ProjectileFactory
+from TotLH.entities.projectiles.projectile_type import ProjectileType
 from TotLH.entities.rendergroup import RenderGroup
 from TotLH.entities.enemies.enemy import EnemyType, Enemy
 from TotLH.entities.pool import Pool
@@ -31,6 +32,7 @@ class Game:
         self.__players = RenderGroup()
         self.__enemies = RenderGroup()
         self.__projectiles_allied = RenderGroup()
+        self.__projectiles_enemy = RenderGroup()
 
 
         # A esos grupos le añadimos las instancias
@@ -74,18 +76,23 @@ class Game:
                 self.__players.handle_events(event)
                 self.__projectiles_allied.handle_events(event)
                 self.__enemies.handle_events(event)
+                self.__projectiles_enemy.handle_events(event)
 
     
     def __handle_events(self, event): # Gestionamos la reaccion a cada evento
         if event.event == Events.HERO_FIRES:
-            self.__projectiles_allied.add(Projectile_allied(event.pos, event.dir))
+            self.__projectiles_allied.add(ProjectileFactory.create_projectile(ProjectileType.Allied, event.pos, event.dir))
         
         elif event.event == Events.PROJECTILE_OUT_OF_SCREEN:
             self.__projectiles_allied.remove(event.proj)
- 
+            self.__projectiles_enemy.remove(event.proj)
+
         elif event.event == Events.ENEMY_OUT_OF_SCREEN:
             self.__enemy_pool.release(event.enemy)
             self.__enemies.remove(event.enemy)
+
+        elif event.event == Events.ENEMY_FIRES:
+            self.__projectiles_enemy.add(ProjectileFactory.create_projectile(ProjectileType.Enemy, event.pos, event.dir))
         
 
     
@@ -94,6 +101,7 @@ class Game:
             self.__players.update(delta_time)
             self.__projectiles_allied.update(delta_time)
             self.__enemies.update(delta_time)
+            self.__projectiles_enemy.update(delta_time)
 
 
     def __render(self):
@@ -101,6 +109,7 @@ class Game:
         self.__players.render(self.__screen)
         self.__projectiles_allied.render(self.__screen)
         self.__enemies.render(self.__screen)
+        self.__projectiles_enemy.render(self.__screen)
 
         pygame.display.update()
     

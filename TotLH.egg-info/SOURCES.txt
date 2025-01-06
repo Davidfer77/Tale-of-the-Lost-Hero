@@ -1,6 +1,8 @@
 setup.py
 TotLH/__init__.py
 TotLH/__main__.py
+TotLH/config.py
+TotLH/events.py
 TotLH/game.py
 TotLH.egg-info/PKG-INFO
 TotLH.egg-info/SOURCES.txt

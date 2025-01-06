@@ -5,6 +5,10 @@
         "caption" : "Tale of the Lost Hero"
     },
     "scenario" : {
+        "intro" : {
+            "path" : "TotLH.assets.images",
+            "filename" : "intro_screen.png"
+        },
         "bg_1" : {
             "path" : "TotLH.assets.images",
             "filename" : "background1.png", 
@@ -18,15 +22,25 @@
         }
     },
     "fonts" : {
-        "intro" : {
+        "title" : {
             "path" : "TotLH.assets.fonts",
             "filename" : "Sketch_Gothic_School.ttf",
-            "size" : 10
+            "config" : {
+                "name" : "Tale of the Lost Hero",
+                "name_pos" : [60, 150],
+                "name_size" : 80,
+                "color" : [0, 0, 0]
+            }
         },
-        "in_game" : {
+        "text" : {
             "path" : "TotLH.assets.fonts",
             "filename" : "alagard.ttf",
-            "size" : 5
+            "config" : {
+                "instructions" : "Press any key to start",
+                "instructions_pos" : [250, 575],
+                "instructions_size" : 20,
+                "color" : [0, 0, 0]
+            }
         }
 
     },
@@ -113,9 +127,19 @@
         },
         "enemy" : {
             "image" : {
-                "path" : "TotLH.assets.images",
-                "filename" : "arrow.png",
-                "size" : [20, 20]
+                "standard" : {
+                    "path" : "TotLH.assets.images",
+                    "filename" : "arrow.png",
+                    "size" : [20, 20]                   
+                },
+                "explosion" : {
+                    "path" : "TotLH.assets.images",
+                    "filename" : "explosion.png",
+                    "rows" : 4,
+                    "cols" : 4,
+                    "size" : [20, 20],
+                    "time_sequence" : 40      
+                }
             },
             "stats" : {
                 "velocity" : [0.0, 0.4],

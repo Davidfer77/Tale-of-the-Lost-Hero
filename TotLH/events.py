@@ -5,4 +5,5 @@ class Events(Enum):
     PROJECTILE_OUT_OF_SCREEN = 1, # parameter instance of the projectile
     ENEMY_OUT_OF_SCREEN = 2, # parameter enemy = instance of the enemy
     ENEMY_FIRES = 3, # parameter pos = position of the projectile in the spawn
+    EXPLOSION_ENDS = 4, # parameter expl = instance of the explosion, el self
 

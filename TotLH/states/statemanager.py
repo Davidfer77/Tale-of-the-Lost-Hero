@@ -1,6 +1,7 @@
 import pygame
 from TotLH.states.intro import Intro
 from TotLH.states.gameplay import GamePlay
+from TotLH.states.gameover import GameOver
 from TotLH.states.states import States
 
 
@@ -9,7 +10,8 @@ class StateManager:
     def __init__(self):
         self.__states = {
             States.Intro : Intro(),
-            States.GamePlay : GamePlay()
+            States.GamePlay : GamePlay(),
+            States.GameOver : GameOver()
         }
 
         self.__current_state_name = States.Intro

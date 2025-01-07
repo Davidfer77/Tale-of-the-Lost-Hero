@@ -24,7 +24,7 @@ class GamePlay(State):
         self.__enemy_pool = Pool(10, Enemy)
         self.__explosions = RenderGroup()
 
-        self.next_state = States.Intro
+        self.next_state = States.GameOver
     
     def enter(self):
         self.__players.add(Hero())
@@ -43,8 +43,8 @@ class GamePlay(State):
         elif event.type == pygame.KEYUP:
             self.__players.handle_input(event.key, False)
 
-        #elif event.type == pygame.MOUSEBUTTONDOWN: GESTIONADO CON EL CLICK DEL RATON
-        #    self.__explosions.add(Explosion(event.pos))
+        elif event.type == pygame.MOUSEBUTTONDOWN: #GESTIONADO CON EL CLICK DEL RATON
+            self.__explosions.add(Explosion(event.pos))
 
 
     def handle_events(self, event):
@@ -63,6 +63,8 @@ class GamePlay(State):
         self.__enemies.update(delta_time)
         self.__projectiles_enemy.update(delta_time)
         self.__explosions.update(delta_time)
+
+        self.__detect_colissions()
 
 
     def render(self, screen):
@@ -113,4 +115,27 @@ class GamePlay(State):
             enemy.init(enemy_type, spawn_pos)
 
             self.__enemies.add(enemy)
+    
+    def __spawn_explosion(self, position):
+        self.__explosions.add(Explosion(position))
+
+    def __game_over(self):
+        print("GAME OVER")
+        self.done = True
+
+    def __detect_colissions(self):
+        for player in pygame.sprite.groupcollide(self.__players, self.__projectiles_enemy, True, True).keys():
+            self.__spawn_explosion(player.half_size_pos)
+            self.__game_over()
+
+        for enemy in pygame.sprite.groupcollide(self.__enemies, self.__projectiles_allied, True, True).keys():
+            self.__spawn_explosion(enemy.half_size_pos)
+
+        for player, enemies in pygame.sprite.groupcollide(self.__players, self.__enemies, True, True).items():
+            self.__spawn_explosion(player.half_size_pos)
+
+            for enemy in enemies:
+                self.__spawn_explosion(enemy.half_size_pos)
+            
+            self.__game_over()
 

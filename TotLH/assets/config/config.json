@@ -63,14 +63,23 @@
                 "instructions_size" : 20,
                 "color" : [0, 0, 0]
             }
+        },
+        "gameover" : {
+            "path" : "TotLH.assets.fonts",
+            "filename" : "alagard.ttf",
+            "config" : {
+                "gameover" : "GAME OVER",
+                "gameover_pos" : [60, 150],
+                "gameover_size" : 100,
+                "color" : [0, 0, 0]
+            }
         }
-
     },
     "hero" : {
         "image" : {
             "path" : "TotLH.assets.images",
             "filename" : "hero_try5.png",
-            "size" : [100, 100]
+            "size" : [75, 100]
         },
         "stats" : {
             "life" : 200,
@@ -83,7 +92,7 @@
             "image" : {
                 "path" : "TotLH.assets.images",
                 "filename" : "skeleton.png",
-                "size" : [100, 100]
+                "size" : [60, 90]
             },
             "stats" : {
                 "life" : 30,
@@ -96,7 +105,7 @@
             "image" : {
                 "path" : "TotLH.assets.images",
                 "filename" : "predator.png",
-                "size" : [100, 100]
+                "size" : [100, 75]
             },
             "stats" : {
                 "life" : 20,
@@ -137,7 +146,8 @@
             "image" : {
                 "path" : "TotLH.assets.images",
                 "filename" : "arrow.png",
-                "size" : [40, 40]
+                "size" : [10, 50],
+                "lateral_size" : [50, 10]
             },
             "stats" : {
                 "velocity" : [0.0, -0.4],
@@ -151,7 +161,7 @@
                 "standard" : {
                     "path" : "TotLH.assets.images",
                     "filename" : "arrow.png",
-                    "size" : [20, 20]                   
+                    "size" : [10, 50]                   
                 },
                 "explosion" : {
                     "path" : "TotLH.assets.images",

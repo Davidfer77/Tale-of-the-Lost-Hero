@@ -7,6 +7,7 @@ class GameObject(pygame.sprite.Sprite, ABC):
     def __init__(self):
         super().__init__()
         self._pos = pygame.math.Vector2(0.0, 0.0)
+        self.rect = pygame.Rect(0, 0, 0, 0)
 
     @abstractmethod
     def handle_input(self, key, is_pressed):
@@ -29,3 +30,23 @@ class GameObject(pygame.sprite.Sprite, ABC):
 
         return new_pos.x >= 0 and new_pos.x <= cfg_item("game", "screen_size")[0] \
               and new_pos.y >=0 and new_pos.y <= cfg_item("game", "screen_size")[1]
+
+    def _rect_sync(self):
+        self.rect.x = self._pos.x
+        self.rect.y = self._pos.y
+        width, height = self.image_size
+        self.rect.width = width
+        self.rect.height = height
+
+    @property
+    def position(self):
+        return self._pos
+    
+    @property
+    def image_size(self):
+        return self.image.get_width(), self.image.get_height()
+
+    @property
+    def half_size_pos(self):
+        pos = pygame.math.Vector2(self._pos.x + self.image.get_width() / 2, self._pos.y + self.image.get_height() / 2)
+        return pos

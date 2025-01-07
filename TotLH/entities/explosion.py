@@ -14,7 +14,10 @@ class Explosion(GameObject):
         cols = cfg_item("projectiles", "enemy", "image", "explosion", "cols")
 
         with resources.path(cfg_item("projectiles", "enemy", "image", "explosion", "path"), cfg_item("projectiles", "enemy", "image", "explosion", "filename")) as image_path:
+            image = pygame.image.load(image_path).convert_alpha()
             self.__flipbook = FlipBook(image_path, rows, cols)
+            self._pos.x -= image.get_width()/2/cols
+            self._pos.y -= image.get_height()/2/rows
         
         self.__current_sequence = 0
         self.__current_time = 0

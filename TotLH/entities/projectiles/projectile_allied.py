@@ -32,13 +32,13 @@ class Projectile_allied(Projectile):
         if Projectile_allied.__image_up is None:
             with resources.path(cfg_item("projectiles","allied", "image", "path"), cfg_item("projectiles","allied", "image", "filename")) as image_path:
                 Projectile_allied.__raw_image_up = pygame.image.load(image_path).convert_alpha()
-                Projectile_allied.__raw_image_left = pygame.transform.rotate(Projectile_allied.__raw_image_up, 270)
+                Projectile_allied.__raw_image_left = pygame.transform.rotate(Projectile_allied.__raw_image_up, 90)
                 Projectile_allied.__raw_image_down = pygame.transform.rotate(Projectile_allied.__raw_image_up, 180)
-                Projectile_allied.__raw_image_right = pygame.transform.rotate(Projectile_allied.__raw_image_up, 90)
+                Projectile_allied.__raw_image_right = pygame.transform.rotate(Projectile_allied.__raw_image_up, 270)
                 Projectile_allied.__image_up = pygame.transform.scale(Projectile_allied.__raw_image_up, cfg_item("projectiles","allied", "image", "size")).convert_alpha()
-                Projectile_allied.__image_left = pygame.transform.scale(Projectile_allied.__raw_image_left, cfg_item("projectiles","allied", "image", "size")).convert_alpha()
+                Projectile_allied.__image_left = pygame.transform.scale(Projectile_allied.__raw_image_left, cfg_item("projectiles","allied", "image", "lateral_size")).convert_alpha()
                 Projectile_allied.__image_down = pygame.transform.scale(Projectile_allied.__raw_image_down, cfg_item("projectiles","allied", "image", "size")).convert_alpha()
-                Projectile_allied.__image_right = pygame.transform.scale(Projectile_allied.__raw_image_right, cfg_item("projectiles","allied", "image", "size")).convert_alpha()
+                Projectile_allied.__image_right = pygame.transform.scale(Projectile_allied.__raw_image_right, cfg_item("projectiles","allied", "image", "lateral_size")).convert_alpha()
                 Projectile_allied.__image_half_width = Projectile_allied.__image_up.get_width()/2
                 Projectile_allied.__image_half_height = Projectile_allied.__image_up.get_height()/2
 

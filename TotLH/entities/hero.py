@@ -29,6 +29,8 @@ class Hero(GameObject):
 
         self.__arrow_cooldown = 0
 
+        self.__last_direction = "up"
+
     
     def __del__(self):
         pass
@@ -36,16 +38,16 @@ class Hero(GameObject):
     def handle_input(self, key, is_pressed):
         if key == pygame.K_LEFT or key == pygame.K_a:
             self.__moving["left"] = is_pressed
-            return "left"
+            self.__last_direction = "left"
         if key == pygame.K_RIGHT or key == pygame.K_d:
             self.__moving["right"] = is_pressed
-            return "right"
+            self.__last_direction = "right"
         if key == pygame.K_UP or key == pygame.K_w:
             self.__moving["up"] = is_pressed
-            return "up"
+            self.__last_direction = "up"
         if key == pygame.K_DOWN or key == pygame.K_s:
             self.__moving["down"] = is_pressed
-            return "down"
+            self.__last_direction = "down"
         if key == pygame.K_SPACE and self.__arrow_cooldown <= 0.0:
             self.__fire()
 
@@ -73,6 +75,8 @@ class Hero(GameObject):
         
         if self.__arrow_cooldown >= 0.0:
             self.__arrow_cooldown -= delta_time
+        
+        self._rect_sync()
     
     def render(self, screen):
         screen.blit(self.__image_resized, (self._pos.x, self._pos.y))
@@ -93,11 +97,14 @@ class Hero(GameObject):
    
         self.__arrow_cooldown = cfg_item("projectiles","allied", "stats", "cooldown")
     
-        direction = "right"
 
         #Creamos el evento
-        fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.HERO_FIRES, pos = proj_pos, dir = direction)
+        fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.HERO_FIRES, pos = proj_pos, dir = self.__last_direction)
         #Lanzamos el evento a la cola
         pygame.event.post(fire_event)
+
+    @property
+    def image(self):
+        return self.__image_resized
 
 

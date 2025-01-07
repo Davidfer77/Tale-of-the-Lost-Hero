@@ -28,6 +28,10 @@ class Projectile(GameObject):
             out_of_screen_event = pygame.event.Event(pygame.USEREVENT, event = Events.PROJECTILE_OUT_OF_SCREEN, proj = self)
             #Lanzamos el evento a la cola
             pygame.event.post(out_of_screen_event)
+        
+        self._rect_sync()
 
     def render(self, screen):
-        screen.blit(self.image, (self._pos.x-self.image_half_width, self._pos.y-self.image_half_height))
+        #screen.blit(self.image, (self._pos.x-self.image_half_width, self._pos.y-self.image_half_height))
+        screen.blit(self.image, (self._pos.x, self._pos.y))
+

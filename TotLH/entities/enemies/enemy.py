@@ -95,6 +95,8 @@ class Enemy(GameObject, ReusableObject):
 
         if self.__fire_cooldown >= 0.0:
             self.__fire_cooldown -= delta_time
+        
+        self._rect_sync()
 
         #self.__fire()
 
@@ -136,3 +138,8 @@ class Enemy(GameObject, ReusableObject):
             fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.ENEMY_FIRES, pos = proj_pos, dir = direction)
             #Lanzamos el evento a la cola
             pygame.event.post(fire_event)
+    
+
+    @property
+    def image(self):
+        return self.__image

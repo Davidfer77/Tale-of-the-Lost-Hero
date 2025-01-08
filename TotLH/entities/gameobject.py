@@ -25,11 +25,11 @@ class GameObject(pygame.sprite.Sprite, ABC):
     def render(self, screen):
         pass
 
-    def _in_bounds(self, distance):
+    def _in_bounds(self, distance, width, height):
         new_pos = self._pos + distance
 
-        return new_pos.x >= 0 and new_pos.x <= cfg_item("game", "screen_size")[0] \
-              and new_pos.y >=0 and new_pos.y <= cfg_item("game", "screen_size")[1]
+        return new_pos.x >= 0 and new_pos.x <= cfg_item("game", "screen_size")[0] - width \
+              and new_pos.y >=0 and new_pos.y <= cfg_item("game", "screen_size")[1] - height
 
     def _rect_sync(self):
         self.rect.x = self._pos.x

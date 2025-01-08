@@ -74,7 +74,7 @@ class Hero(GameObject):
             movement.y += speed
         
         distance = movement * delta_time
-        if self._in_bounds(distance):
+        if self._in_bounds(distance, self.__image_half_width*2, self.__image_half_height*2):
             self._pos += distance
             move_event = pygame.event.Event(pygame.USEREVENT, event = Events.HERO_MOVES, hero_pos = self._pos)
             pygame.event.post(move_event)

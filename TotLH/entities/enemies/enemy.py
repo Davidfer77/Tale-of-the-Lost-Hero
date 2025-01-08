@@ -86,9 +86,9 @@ class Enemy(GameObject, ReusableObject):
         pass
 
     def update(self, delta_time):
-        if self._pos.y > cfg_item("game", "screen_size")[1]:
-            out_of_screen_event = pygame.event.Event(pygame.USEREVENT, event = Events.ENEMY_OUT_OF_SCREEN, enemy = self)
-            pygame.event.post(out_of_screen_event)
+        #if self._pos.y > cfg_item("game", "screen_size")[1]:
+        #    out_of_screen_event = pygame.event.Event(pygame.USEREVENT, event = Events.ENEMY_OUT_OF_SCREEN, enemy = self)
+        #    pygame.event.post(out_of_screen_event)
         
         self.__fire()
 

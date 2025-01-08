@@ -21,12 +21,10 @@ class Projectile(GameObject):
     def update(self, delta_time):
         distance = self.__velocity * delta_time
 
-        if self._in_bounds(distance):
+        if self._in_bounds(distance, 0, 0):
             self._pos += distance
         else:
-            #Creamos el evento de salida de pantalla y da como parametro la propia instancia (self) para luego borrar esa instancia
             out_of_screen_event = pygame.event.Event(pygame.USEREVENT, event = Events.PROJECTILE_OUT_OF_SCREEN, proj = self)
-            #Lanzamos el evento a la cola
             pygame.event.post(out_of_screen_event)
         
         self._rect_sync()

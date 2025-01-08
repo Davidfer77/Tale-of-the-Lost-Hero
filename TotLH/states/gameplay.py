@@ -98,9 +98,9 @@ class GamePlay(State):
             self.__projectiles_allied.remove(event.proj)
             self.__projectiles_enemy.remove(event.proj)
 
-        elif event.event == Events.ENEMY_OUT_OF_SCREEN:
-            self.__enemy_pool.release(event.enemy)
-            self.__enemies.remove(event.enemy)
+        #elif event.event == Events.ENEMY_OUT_OF_SCREEN:
+        #    self.__enemy_pool.release(event.enemy)
+        #    self.__enemies.remove(event.enemy)
 
         elif event.event == Events.ENEMY_FIRES:
             self.__projectiles_enemy.add(ProjectileFactory.create_projectile(ProjectileType.Enemy, event.pos, event.dir, event.dmg))

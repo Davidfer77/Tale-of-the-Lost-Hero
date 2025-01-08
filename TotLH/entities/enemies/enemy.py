@@ -37,6 +37,10 @@ class Enemy(GameObject, ReusableObject):
             "down" : False
         }
 
+        self.__last_movement = "down"
+
+        self.__direction = pygame.math.Vector2(0.0, 0.0)
+
     def __load_image(self, image, enemy_str):
         if image is None:
             with resources.path(cfg_item("enemy",enemy_str, "image", "path"), cfg_item("enemy",enemy_str, "image", "filename")) as image_path:
@@ -80,15 +84,8 @@ class Enemy(GameObject, ReusableObject):
         pass
 
     def update(self, delta_time):
-        self.__velocity = pygame.math.Vector2(0, self.__speed)
-        distance = self.__velocity * delta_time
-
-        if self._pos.y <= cfg_item("game", "screen_size")[1]:
-            self._pos += distance
-        else:
-            #Creamos el evento de salida de pantalla y da como parametro la propia instancia (self) para luego borrar esa instancia
+        if self._pos.y > cfg_item("game", "screen_size")[1]:
             out_of_screen_event = pygame.event.Event(pygame.USEREVENT, event = Events.ENEMY_OUT_OF_SCREEN, enemy = self)
-            #Lanzamos el evento a la cola
             pygame.event.post(out_of_screen_event)
         
         self.__fire()
@@ -131,11 +128,24 @@ class Enemy(GameObject, ReusableObject):
             proj_pos = pygame.math.Vector2(self._pos.x , self._pos.y)
     
             self.__fire_cooldown = cfg_item("projectiles","enemy", "stats", "cooldown")
-        
-            direction = "right"
+
+            if abs(self.__direction.x) > abs(self.__direction.y):
+                # Disparar horizontalmente
+                #direction = Vector2(self.__direction.x, 0).normalize()
+                if self.__direction.x > 0:
+                    self.__last_movement = "right"
+                else:
+                    self.__last_movement = "left"
+            else:
+                # Disparar verticalmente
+                #direction = Vector2(0, direction.y).normalize()
+                if self.__direction.y > 0:
+                    self.__last_movement = "down"
+                else:
+                    self.__last_movement = "up"
 
             #Creamos el evento
-            fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.ENEMY_FIRES, pos = proj_pos, dir = direction)
+            fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.ENEMY_FIRES, pos = proj_pos, dir = self.__last_movement)
             #Lanzamos el evento a la cola
             pygame.event.post(fire_event)
     
@@ -143,3 +153,10 @@ class Enemy(GameObject, ReusableObject):
     @property
     def image(self):
         return self.__image
+
+    def move_towards_player(self, hero_pos, delta_time):
+        direction = hero_pos - self._pos
+        if direction.length() != 0:
+            self.__direction = direction.normalize()
+
+        self._pos += self.__direction * self.__speed * delta_time

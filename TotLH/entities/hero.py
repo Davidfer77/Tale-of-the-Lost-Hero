@@ -71,6 +71,8 @@ class Hero(GameObject):
         distance = movement * delta_time
         if self._in_bounds(distance):
             self._pos += distance
+            move_event = pygame.event.Event(pygame.USEREVENT, event = Events.HERO_MOVES, hero_pos = self._pos)
+            pygame.event.post(move_event)
 
         
         if self.__arrow_cooldown >= 0.0:

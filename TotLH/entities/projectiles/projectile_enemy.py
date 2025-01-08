@@ -12,8 +12,20 @@ class Projectile_enemy(Projectile):
     __image_half_height = None
 
 
-    def __init__(self, position):
-        velocity = pygame.math.Vector2(cfg_item("projectiles", "enemy", "stats", "velocity"))
+    def __init__(self, position, direction):
+        self.__direction = direction
+        #velocity = pygame.math.Vector2(cfg_item("projectiles", "enemy", "stats", "velocity"))
+
+        velocity = pygame.math.Vector2(0.0, 0.0)
+        if self.__direction == "left":
+            velocity = pygame.math.Vector2(-cfg_item("projectiles", "allied", "stats", "speed"), 0.0)
+        elif self.__direction == "right":
+            velocity = pygame.math.Vector2(cfg_item("projectiles", "allied", "stats", "speed"), 0.0)
+        elif self.__direction == "up":
+            velocity = pygame.math.Vector2(0.0, -cfg_item("projectiles", "allied", "stats", "speed"))
+        elif self.__direction == "down":
+            velocity = pygame.math.Vector2(0.0, cfg_item("projectiles", "allied", "stats", "speed"))
+
         super().__init__(position, velocity)
 
         if Projectile_enemy.__image is None:

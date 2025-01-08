@@ -25,6 +25,8 @@ class GamePlay(State):
         self.__explosions = RenderGroup()
 
         self.next_state = States.GameOver
+
+        self.__clock = pygame.time.Clock()
     
     def enter(self):
         self.__players.add(Hero())
@@ -91,7 +93,12 @@ class GamePlay(State):
             self.__projectiles_enemy.add(ProjectileFactory.create_projectile(ProjectileType.Enemy, event.pos, event.dir))
 
         elif event.event == Events.EXPLOSION_ENDS:
-            self.__explosions.remove(event.expl)           
+            self.__explosions.remove(event.expl)  
+
+        elif event.event == Events.HERO_MOVES:
+            delta_time = self.__clock.tick(cfg_item("game","fps"))
+            self.__enemies.move_towards_player(event.hero_pos, delta_time)      
+             
 
     def __spawn_enemy(self):
         if random.random() < cfg_item("scenario", "bg_1", "enemy_spawn_prob"):
@@ -120,7 +127,6 @@ class GamePlay(State):
         self.__explosions.add(Explosion(position))
 
     def __game_over(self):
-        print("GAME OVER")
         self.done = True
 
     def __detect_colissions(self):

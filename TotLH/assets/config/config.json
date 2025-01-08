@@ -15,9 +15,9 @@
             "enemy_spawn_prob" : 0.01,
             "enemy_spawn_weight" : {
                 "skeleton" : 80,
-                "predator" : 20,
+                "predator" : 0,
                 "shadow" : 0,
-                "devil" : 100
+                "devil" : 0
             }
         },
         "scenario2" : {
@@ -98,7 +98,7 @@
                 "life" : 30,
                 "speed" : 0.1,
                 "damage" : 20,
-                "fire_rate" : 0.0
+                "fire_rate" : 0.05
             }
         },
         "predator" : {
@@ -160,8 +160,8 @@
             "image" : {
                 "standard" : {
                     "path" : "TotLH.assets.images",
-                    "filename" : "arrow.png",
-                    "size" : [10, 50]                   
+                    "filename" : "fireball.png",
+                    "size" : [50, 50]                   
                 },
                 "explosion" : {
                     "path" : "TotLH.assets.images",

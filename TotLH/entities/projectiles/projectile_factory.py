@@ -9,4 +9,4 @@ class ProjectileFactory:
         if projectile_type == ProjectileType.Allied:
             return Projectile_allied(position, direction)
         elif projectile_type == ProjectileType.Enemy:
-            return Projectile_enemy(position)
+            return Projectile_enemy(position, direction)

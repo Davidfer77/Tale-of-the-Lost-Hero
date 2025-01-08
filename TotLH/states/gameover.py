@@ -14,17 +14,17 @@ class GameOver(State):
         with resources.path(cfg_item("fonts", "gameover", "path"), cfg_item("fonts", "gameover", "filename")) as name_path:
             name = pygame.font.Font(name_path, cfg_item("fonts", "gameover", "config", "gameover_size"))
         # Instructions text
-        with resources.path(cfg_item("fonts", "text", "path"), cfg_item("fonts", "text", "filename")) as instructions_path:
-            instructions = pygame.font.Font(instructions_path, cfg_item("fonts", "text", "config", "instructions_size"))
+        with resources.path(cfg_item("fonts", "gameover", "path"), cfg_item("fonts", "gameover", "filename")) as instructions_path:
+            instructions = pygame.font.Font(instructions_path, cfg_item("fonts", "gameover", "config", "instructions_size"))
 
         # Intro image
-        with resources.path(cfg_item("scenario","intro", "path"), cfg_item("scenario", "intro", "filename")) as intro_image_path:
+        with resources.path(cfg_item("scenario", "gameover", "path"), cfg_item("scenario", "gameover", "filename")) as intro_image_path:
             intro_image=pygame.image.load(intro_image_path).convert_alpha()
             self.__intro_image_resized = pygame.transform.scale(intro_image, cfg_item("game", "screen_size")).convert_alpha()
 
 
         self.__name_text = name.render(cfg_item("fonts", "gameover", "config", "gameover"), True, cfg_item("fonts", "gameover", "config", "color"))
-        self.__instructions_text = instructions.render(cfg_item("fonts", "text", "config", "instructions"), True, cfg_item("fonts", "text", "config", "color"))
+        self.__instructions_text = instructions.render(cfg_item("fonts", "gameover", "config", "instructions"), True, cfg_item("fonts", "gameover", "config", "color"))
 
     def __del__(self):
         pass
@@ -48,4 +48,4 @@ class GameOver(State):
     def render(self, screen):
         screen.blit(self.__intro_image_resized,(0,0))
         screen.blit(self.__name_text, cfg_item("fonts", "gameover", "config", "gameover_pos"))
-        screen.blit(self.__instructions_text, cfg_item("fonts", "text", "config", "instructions_pos"))
+        screen.blit(self.__instructions_text, cfg_item("fonts", "gameover", "config", "instructions_pos"))

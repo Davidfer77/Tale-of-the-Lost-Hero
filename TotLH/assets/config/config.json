@@ -55,6 +55,10 @@
                 "shadow" : 0,
                 "devil" : 100
             }
+        },
+        "gameover" : {
+            "path" : "TotLH.assets.images",
+            "filename" : "gameover.png"
         }
     },
     "fonts" : {
@@ -83,8 +87,11 @@
             "filename" : "alagard.ttf",
             "config" : {
                 "gameover" : "GAME OVER",
-                "gameover_pos" : [60, 150],
+                "gameover_pos" : [100, 250],
                 "gameover_size" : 100,
+                "instructions" : "Press any key to restart",
+                "instructions_pos" : [200, 580],
+                "instructions_size" : 30,
                 "color" : [0, 0, 0]
             }
         }

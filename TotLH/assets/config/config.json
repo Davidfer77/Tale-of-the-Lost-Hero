@@ -12,10 +12,10 @@
         "bg_1" : {
             "path" : "TotLH.assets.images",
             "filename" : "background1.png", 
-            "enemy_spawn_prob" : 0.01,
+            "enemy_spawn_prob" : 0.005,
             "enemy_spawn_weight" : {
                 "skeleton" : 80,
-                "predator" : 0,
+                "predator" : 20,
                 "shadow" : 0,
                 "devil" : 0
             }
@@ -76,8 +76,6 @@
         }
     },
     "life_bar" : {
-        "font_path" : "TotLH.assets.fonts",
-        "font_filename" : "alagard.ttf",
         "config" : {
             "bar_width" : 200,
             "bar_height" : 20,
@@ -86,6 +84,14 @@
             "rect_edge" : 2,
             "text_size" : 30,
             "text_separation" : 10,
+            "color" : [255, 255, 255]
+        }
+    },
+    "scoreboard" : {
+        "config" : {
+            "text_size" : 40,
+            "text_separation_x" : 20,
+            "text_separation_y" : 20,
             "color" : [255, 255, 255]
         }
     },
@@ -112,7 +118,8 @@
                 "life" : 70,
                 "speed" : 0.1,
                 "damage" : 20,
-                "fire_rate" : 0.01
+                "fire_rate" : 0.1,
+                "score" : 50
             }
         },
         "predator" : {
@@ -125,7 +132,8 @@
                 "life" : 20,
                 "speed" : 0.2,
                 "damage" : 50,
-                "fire_rate" : 0.0
+                "fire_rate" : 0.0,
+                "score" : 75
             }
         },
         "shadow" : {
@@ -138,7 +146,8 @@
                 "life" : 30,
                 "speed" : 0.05,
                 "damage" : 35,
-                "fire_rate" : 0.0
+                "fire_rate" : 0.1,
+                "score" : 100
             }
         },
         "devil" : {
@@ -151,7 +160,8 @@
                 "life" : 500,
                 "speed" : 0.02,
                 "damage" : 75,
-                "fire_rate" : 0.05
+                "fire_rate" : 0.05,
+                "score" : 1000
             }
         }
     },

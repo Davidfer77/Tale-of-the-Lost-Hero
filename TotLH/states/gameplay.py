@@ -13,6 +13,7 @@ from TotLH.entities.rendergroup import RenderGroup
 from TotLH.entities.projectiles.projectile_factory import ProjectileFactory
 from TotLH.entities.projectiles.projectile_type import ProjectileType
 from TotLH.entities.projectiles.projectile_enemy import Projectile_enemy
+from TotLH.entities.scoreboard import Scoreboard
 from TotLH.entities.explosion import Explosion
 
 class GamePlay(State):
@@ -25,12 +26,16 @@ class GamePlay(State):
         self.__enemy_pool = Pool(10, Enemy)
         self.__explosions = RenderGroup()
 
+        self.__scorepoints = RenderGroup()
+
         self.next_state = States.GameOver
 
         self.__clock = pygame.time.Clock()
+
     
     def enter(self):
         self.__players.add(Hero())
+        self.__scorepoints.add(Scoreboard())
         self.done = False
 
     def exit(self):
@@ -59,6 +64,9 @@ class GamePlay(State):
         self.__projectiles_enemy.handle_events(event)
         self.__explosions.handle_events(event)
 
+        self.__scorepoints.handle_events(event)
+
+
     def update(self, delta_time):
         self.__spawn_enemy()
         self.__players.update(delta_time)
@@ -69,6 +77,8 @@ class GamePlay(State):
 
         self.__detect_colissions()
 
+        self.__scorepoints.update(delta_time)
+
 
     def render(self, screen):
         self.__enemies.render(screen)
@@ -76,6 +86,8 @@ class GamePlay(State):
         self.__projectiles_allied.render(screen)
         self.__projectiles_enemy.render(screen)
         self.__explosions.render(screen)
+
+        self.__scorepoints.render(screen)
 
 
     def __handle_events(self, event): # Gestionamos la reaccion a cada evento
@@ -98,7 +110,10 @@ class GamePlay(State):
 
         elif event.event == Events.HERO_MOVES:
             delta_time = self.__clock.tick(cfg_item("game","fps"))
-            self.__enemies.move_towards_player(event.hero_pos, delta_time)      
+            self.__enemies.move_towards_player(event.hero_pos, delta_time)    
+
+        elif event.event == Events.ENEMY_SLAINED:
+            self.__scorepoints.add_points(event.score)
              
 
     def __spawn_enemy(self):
@@ -132,23 +147,22 @@ class GamePlay(State):
 
     def __detect_colissions(self):
         for player, projectiles in pygame.sprite.groupcollide(self.__players, self.__projectiles_enemy, False, True).items():
-            #self.__spawn_explosion(player.half_size_pos)
+            self.__spawn_explosion(player.half_size_pos)
             for projectile in projectiles:
                 player.take_damage(projectile.damage)
                 if player.life <= 0:
                     self.__game_over()
 
         for enemy, projectiles in pygame.sprite.groupcollide(self.__enemies, self.__projectiles_allied, False, True).items():
-            self.__spawn_explosion(enemy.half_size_pos)
+            # self.__spawn_explosion(enemy.half_size_pos)
             for projectile in projectiles:
                 enemy.take_damage(projectile.damage)
 
 
         for player, enemies in pygame.sprite.groupcollide(self.__players, self.__enemies, True, True).items():
-            self.__spawn_explosion(player.half_size_pos)
+            # self.__spawn_explosion(player.half_size_pos)
 
-            for enemy in enemies:
-                self.__spawn_explosion(enemy.half_size_pos)
+            #for enemy in enemies:
+                #self.__spawn_explosion(enemy.half_size_pos)
             
             self.__game_over()
-

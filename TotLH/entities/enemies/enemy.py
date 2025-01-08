@@ -56,6 +56,7 @@ class Enemy(GameObject, ReusableObject):
         self.__max_health = cfg_item("enemy", enemy_str, "stats", "life")
         self.__damage = cfg_item("enemy", enemy_str, "stats", "damage")
         self.__fire_rate = cfg_item("enemy", enemy_str, "stats", "fire_rate")
+        self.__enemy_score = cfg_item("enemy", enemy_str, "stats", "score")
 
     def reset(self):
         self.__enemy_type = None
@@ -162,10 +163,10 @@ class Enemy(GameObject, ReusableObject):
 
     def take_damage(self, damage):
         self.__life -= damage
-        print(self.__life)
         if self.__life <= 0:
             self.kill()
-    
+            death_event = pygame.event.Event(pygame.USEREVENT, event = Events.ENEMY_SLAINED, score = self.__enemy_score)
+            pygame.event.post(death_event)
 
 
 

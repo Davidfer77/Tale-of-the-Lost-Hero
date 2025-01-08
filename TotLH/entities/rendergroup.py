@@ -24,3 +24,7 @@ class RenderGroup(pygame.sprite.Group):
     def move_towards_player(self, hero_pos, delta_time):
         for sprite in self.sprites():
             sprite.move_towards_player(hero_pos, delta_time)
+
+    def add_points(self, score):
+        for sprite in self.sprites():
+            sprite.add_points(score)

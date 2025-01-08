@@ -97,59 +97,29 @@ class Enemy(GameObject, ReusableObject):
         
         self._rect_sync()
 
-        #self.__fire()
-
     def render(self, screen):
         screen.blit(self.__image, self._pos)
         self.draw_health_bar(screen)
 
-    #def __fire(self):
-    #    if random.random() < self.__fire_Rate:
-    #    proj_pos = pygame.math.Vector2(self._pos.x + self.__image_half_width, self._pos.y + self.__image_half_height)
-        
-    #    if self.__moving["left"] == True:
-    #        proj_pos.x -= self.__image_half_width
-    #    elif self.__moving["right"] == True:
-    #        proj_pos.x += self.__image_half_width
-    #    elif self.__moving["up"] == True:
-    #        proj_pos.y -= self.__image_half_height
-    #    elif self.__moving["down"] == True:
-    #        proj_pos.y += self.__image_half_height
-        
-   
-    #    self.__arrow_cooldown = cfg_item("projectiles","allied", "stats", "cooldown")
-    
-
-        #Creamos el evento
-    #    fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.HERO_FIRES, pos = proj_pos)
-        #Lanzamos el evento a la cola
-    #    pygame.event.post(fire_event)
 
     def __fire(self):
         if random.random() <= self.__fire_rate and self.__fire_cooldown <= 0.0:
-            #proj_pos = pygame.math.Vector2(self._pos.x + self.__image_half_width, self._pos.y + self.__image_half_height)
-            proj_pos = pygame.math.Vector2(self._pos.x , self._pos.y)
+            proj_pos = pygame.math.Vector2(self._pos.x + self.__image.get_width()/2, self._pos.y + self.__image.get_height()/2)
     
             self.__fire_cooldown = cfg_item("projectiles","enemy", "stats", "cooldown")
 
             if abs(self.__direction.x) > abs(self.__direction.y):
-                # Disparar horizontalmente
-                #direction = Vector2(self.__direction.x, 0).normalize()
                 if self.__direction.x > 0:
                     self.__last_movement = "right"
                 else:
                     self.__last_movement = "left"
             else:
-                # Disparar verticalmente
-                #direction = Vector2(0, direction.y).normalize()
                 if self.__direction.y > 0:
                     self.__last_movement = "down"
                 else:
                     self.__last_movement = "up"
 
-            #Creamos el evento
             fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.ENEMY_FIRES, pos = proj_pos, dir = self.__last_movement, dmg = self.__damage)
-            #Lanzamos el evento a la cola
             pygame.event.post(fire_event)
     
 
@@ -169,22 +139,15 @@ class Enemy(GameObject, ReusableObject):
             pygame.event.post(death_event)
 
 
-
     def draw_health_bar(self, screen):
-        # Calcular proporción de vida restante
         health_ratio = self.__life / self.__max_health
         bar_width = self.rect.width
-        bar_height = 5
+        bar_height = cfg_item("enemy_life_bar", "config", "bar_height")
         bar_x = self.rect.left
-        bar_y = self.rect.top - 10  # Ubicar la barra encima del enemigo
+        bar_y = self.rect.top - cfg_item("enemy_life_bar", "config", "bar_separation")
 
-        # Dibujar fondo de la barra (rojo)
         pygame.draw.rect(screen, (255, 0, 0), (bar_x, bar_y, bar_width, bar_height))
-        # Dibujar vida restante (verde)
         pygame.draw.rect(screen, (0, 255, 0), (bar_x, bar_y, bar_width * health_ratio, bar_height))
-
-
-
 
 
     @property

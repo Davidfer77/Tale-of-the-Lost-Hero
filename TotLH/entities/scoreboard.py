@@ -20,18 +20,21 @@ class Scoreboard(GameObject):
         pass
 
     def render(self, screen):
-        font = pygame.font.Font(None, cfg_item("scoreboard", "config", "text_size"))  # Fuente por defecto con tamaño 36
-        text = font.render(str(self.__score), True, cfg_item("scoreboard", "config", "color"))  # Texto blanco
+        font = pygame.font.Font(None, cfg_item("scoreboard", "config", "text_size")) 
+        text = font.render(str(self.__score), True, cfg_item("scoreboard", "config", "color"))  
 
-        # Obtener el ancho y alto del texto
         text_width, text_height = text.get_size()
 
-        # Calcular la posición para alinear a la derecha
         screen_width = screen.get_width()
-        x = screen_width - text_width - cfg_item("scoreboard", "config", "text_separation_x")  # 20 px de margen derecho
-        y = cfg_item("scoreboard", "config", "text_separation_y")  # 20 px desde la parte superior
+        x = screen_width - text_width - cfg_item("scoreboard", "config", "text_separation_x")  
+        y = cfg_item("scoreboard", "config", "text_separation_y") 
 
-        # Dibujar el texto en la pantalla
+        background_width = text_width + cfg_item("scoreboard", "config", "text_separation_x") /2 
+        background_height = text_height + cfg_item("scoreboard", "config", "text_separation_y") /2
+        background_surface = pygame.Surface((background_width, background_height), pygame.SRCALPHA)
+        background_surface.fill(cfg_item("scoreboard", "config", "background_surface_color")) 
+
+        screen.blit(background_surface, (x - cfg_item("scoreboard", "config", "text_separation_x") /4 , y - cfg_item("scoreboard", "config", "text_separation_y") /4))  
         screen.blit(text, (x, y))
     
     def add_points(self, score):

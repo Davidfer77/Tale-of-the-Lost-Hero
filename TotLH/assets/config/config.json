@@ -11,8 +11,20 @@
         },
         "bg_1" : {
             "path" : "TotLH.assets.images",
+            "filename" : "survival.png", 
+            "enemy_spawn_prob" : 0.005,
+            "enemy_spawn_weight" : {
+                "skeleton" : 50,
+                "predator" : 25,
+                "shadow" : 20,
+                "devil" : 5
+            }
+        },
+        "scenario1" : {
+            "path" : "TotLH.assets.images",
             "filename" : "background1.png", 
             "enemy_spawn_prob" : 0.005,
+            "maximum_score" : 1000,
             "enemy_spawn_weight" : {
                 "skeleton" : 80,
                 "predator" : 20,
@@ -24,6 +36,7 @@
             "path" : "TotLH.assets.images",
             "filename" : "background2.png", 
             "enemy_spawn_prob" : 0.01,
+            "maximum_score" : 1000,
             "enemy_spawn_weight" : {
                 "skeleton" : 60,
                 "predator" : 15,
@@ -33,8 +46,9 @@
         },
         "scenario3" : {
             "path" : "TotLH.assets.images",
-            "filename" : "bg_final2.png", 
+            "filename" : "bg_final.png", 
             "enemy_spawn_prob" : 0.01,
+            "maximum_score" : 1000,
             "enemy_spawn_weight" : {
                 "skeleton" : 0,
                 "predator" : 0,
@@ -87,12 +101,19 @@
             "color" : [255, 255, 255]
         }
     },
+    "enemy_life_bar" : {
+        "config" : {
+            "bar_height" : 5,
+            "bar_separation" : 20
+        }
+    },
     "scoreboard" : {
         "config" : {
             "text_size" : 40,
             "text_separation_x" : 20,
             "text_separation_y" : 20,
-            "color" : [255, 255, 255]
+            "color" : [255, 255, 255],
+            "background_surface_color" : [0, 0, 0, 150]
         }
     },
     "hero" : {
@@ -115,10 +136,10 @@
                 "size" : [60, 90]
             },
             "stats" : {
-                "life" : 70,
-                "speed" : 0.1,
+                "life" : 50,
+                "speed" : 0.08,
                 "damage" : 20,
-                "fire_rate" : 0.1,
+                "fire_rate" : 0.0,
                 "score" : 50
             }
         },
@@ -129,7 +150,7 @@
                 "size" : [100, 75]
             },
             "stats" : {
-                "life" : 20,
+                "life" : 30,
                 "speed" : 0.2,
                 "damage" : 50,
                 "fire_rate" : 0.0,
@@ -143,7 +164,7 @@
                 "size" : [100, 100]
             },
             "stats" : {
-                "life" : 30,
+                "life" : 75,
                 "speed" : 0.05,
                 "damage" : 35,
                 "fire_rate" : 0.1,
@@ -174,9 +195,8 @@
                 "lateral_size" : [50, 10]
             },
             "stats" : {
-                "velocity" : [0.0, -0.4],
                 "speed" : 0.4,
-                "damage" : 20,
+                "damage" : 30,
                 "cooldown" : 500
             }
         },
@@ -185,7 +205,7 @@
                 "standard" : {
                     "path" : "TotLH.assets.images",
                     "filename" : "fireball.png",
-                    "size" : [50, 50]                   
+                    "size" : [40, 40]                   
                 },
                 "explosion" : {
                     "path" : "TotLH.assets.images",
@@ -197,9 +217,8 @@
                 }
             },
             "stats" : {
-                "velocity" : [0.0, 0.4],
                 "speed" : 0.4,
-                "damage" : 20,
+                "damage" : 40,
                 "cooldown" : 500
             }
         }

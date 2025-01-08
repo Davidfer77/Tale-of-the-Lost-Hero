@@ -138,11 +138,11 @@ class GamePlay(State):
                 if player.life <= 0:
                     self.__game_over()
 
-        for enemy in pygame.sprite.groupcollide(self.__enemies, self.__projectiles_allied, True, True).keys():
+        for enemy, projectiles in pygame.sprite.groupcollide(self.__enemies, self.__projectiles_allied, False, True).items():
             self.__spawn_explosion(enemy.half_size_pos)
-            #for enemy in self.__enemies:
-            #    enemy.life -= 30
-            #    print(enemy.life)
+            for projectile in projectiles:
+                enemy.take_damage(30)
+
 
         for player, enemies in pygame.sprite.groupcollide(self.__players, self.__enemies, True, True).items():
             self.__spawn_explosion(player.half_size_pos)

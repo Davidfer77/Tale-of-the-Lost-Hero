@@ -156,7 +156,13 @@ class Enemy(GameObject, ReusableObject):
             self.__direction = direction.normalize()
 
         self._pos += self.__direction * self.__speed * delta_time
-        
+
+
+    def take_damage(self, damage):
+        self.__life -= damage
+        print(self.__life)
+        if self.__life <= 0:
+            self.kill()
 
     @property
     def image(self):

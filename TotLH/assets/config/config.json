@@ -95,10 +95,10 @@
                 "size" : [60, 90]
             },
             "stats" : {
-                "life" : 30,
+                "life" : 40,
                 "speed" : 0.1,
                 "damage" : 20,
-                "fire_rate" : 0.05
+                "fire_rate" : 0.01
             }
         },
         "predator" : {

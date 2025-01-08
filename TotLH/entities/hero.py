@@ -109,6 +109,10 @@ class Hero(GameObject):
         #Lanzamos el evento a la cola
         pygame.event.post(fire_event)
 
+
+    def take_damage(self, damage):
+        self.__life -= damage
+
     @property
     def image(self):
         return self.__image_resized

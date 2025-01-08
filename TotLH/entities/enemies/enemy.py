@@ -160,7 +160,6 @@ class Enemy(GameObject, ReusableObject):
 
     def take_damage(self, damage):
         self.__life -= damage
-        print(self.__life)
         if self.__life <= 0:
             self.kill()
 

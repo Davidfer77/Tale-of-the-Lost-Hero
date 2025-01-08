@@ -131,17 +131,18 @@ class GamePlay(State):
         self.done = True
 
     def __detect_colissions(self):
-        for player in pygame.sprite.groupcollide(self.__players, self.__projectiles_enemy, False, True).keys():
+        for player, projectiles in pygame.sprite.groupcollide(self.__players, self.__projectiles_enemy, False, True).items():
             self.__spawn_explosion(player.half_size_pos)
-            for player in self.__players:
-                player.life -= 30
+            for projectile in projectiles:
+                player.take_damage(projectile.damage)
+                print(player.life)
                 if player.life <= 0:
                     self.__game_over()
 
         for enemy, projectiles in pygame.sprite.groupcollide(self.__enemies, self.__projectiles_allied, False, True).items():
             self.__spawn_explosion(enemy.half_size_pos)
             for projectile in projectiles:
-                enemy.take_damage(30)
+                enemy.take_damage(projectile.damage)
 
 
         for player, enemies in pygame.sprite.groupcollide(self.__players, self.__enemies, True, True).items():

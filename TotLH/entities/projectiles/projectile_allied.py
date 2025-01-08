@@ -67,4 +67,9 @@ class Projectile_allied(Projectile):
     def image_half_height(self):
         return Projectile_allied.__image_half_height
 
+    @property
+    def damage(self):
+        return Projectile_allied.__damage
+
+
 

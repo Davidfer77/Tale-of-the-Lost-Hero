@@ -5,7 +5,7 @@ from TotLH.entities.projectiles.projectile_type import ProjectileType
 
 class ProjectileFactory:
     @staticmethod
-    def create_projectile(projectile_type, position, direction):
+    def create_projectile(projectile_type, position, direction, damage):
         if projectile_type == ProjectileType.Allied:
             return Projectile_allied(position, direction)
         elif projectile_type == ProjectileType.Enemy:

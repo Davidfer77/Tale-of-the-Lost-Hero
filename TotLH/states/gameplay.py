@@ -12,6 +12,7 @@ from TotLH.entities.enemies.enemy import EnemyType, Enemy
 from TotLH.entities.rendergroup import RenderGroup
 from TotLH.entities.projectiles.projectile_factory import ProjectileFactory
 from TotLH.entities.projectiles.projectile_type import ProjectileType
+from TotLH.entities.projectiles.projectile_enemy import Projectile_enemy
 from TotLH.entities.explosion import Explosion
 
 class GamePlay(State):
@@ -79,7 +80,7 @@ class GamePlay(State):
 
     def __handle_events(self, event): # Gestionamos la reaccion a cada evento
         if event.event == Events.HERO_FIRES:
-            self.__projectiles_allied.add(ProjectileFactory.create_projectile(ProjectileType.Allied, event.pos, event.dir))
+            self.__projectiles_allied.add(ProjectileFactory.create_projectile(ProjectileType.Allied, event.pos, event.dir, event.dmg))
         
         elif event.event == Events.PROJECTILE_OUT_OF_SCREEN:
             self.__projectiles_allied.remove(event.proj)
@@ -90,7 +91,7 @@ class GamePlay(State):
             self.__enemies.remove(event.enemy)
 
         elif event.event == Events.ENEMY_FIRES:
-            self.__projectiles_enemy.add(ProjectileFactory.create_projectile(ProjectileType.Enemy, event.pos, event.dir))
+            self.__projectiles_enemy.add(ProjectileFactory.create_projectile(ProjectileType.Enemy, event.pos, event.dir, event.dmg))
 
         elif event.event == Events.EXPLOSION_ENDS:
             self.__explosions.remove(event.expl)  
@@ -130,12 +131,18 @@ class GamePlay(State):
         self.done = True
 
     def __detect_colissions(self):
-        for player in pygame.sprite.groupcollide(self.__players, self.__projectiles_enemy, True, True).keys():
+        for player in pygame.sprite.groupcollide(self.__players, self.__projectiles_enemy, False, True).keys():
             self.__spawn_explosion(player.half_size_pos)
-            self.__game_over()
+            for player in self.__players:
+                player.life -= 30
+                if player.life <= 0:
+                    self.__game_over()
 
         for enemy in pygame.sprite.groupcollide(self.__enemies, self.__projectiles_allied, True, True).keys():
             self.__spawn_explosion(enemy.half_size_pos)
+            #for enemy in self.__enemies:
+            #    enemy.life -= 30
+            #    print(enemy.life)
 
         for player, enemies in pygame.sprite.groupcollide(self.__players, self.__enemies, True, True).items():
             self.__spawn_explosion(player.half_size_pos)

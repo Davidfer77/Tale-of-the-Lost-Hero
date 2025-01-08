@@ -11,6 +11,8 @@ class Projectile_enemy(Projectile):
     __image_half_width = None
     __image_half_height = None
 
+    __damage = cfg_item("projectiles", "enemy", "stats", "damage")
+
 
     def __init__(self, position, direction):
         self.__direction = direction
@@ -50,5 +52,9 @@ class Projectile_enemy(Projectile):
     @property
     def image_half_height(self):
         return Projectile_enemy.__image_half_height
+
+    @property
+    def damage(self):
+        return Projectile_enemy.__damage
 
 

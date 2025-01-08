@@ -14,6 +14,8 @@ class Projectile_allied(Projectile):
     __image_half_width = None
     __image_half_height = None
 
+    __damage = cfg_item("projectiles", "allied", "stats", "damage")
+
 
     def __init__(self, position, direction):
         self.__direction = direction

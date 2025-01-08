@@ -145,14 +145,10 @@ class Enemy(GameObject, ReusableObject):
                     self.__last_movement = "up"
 
             #Creamos el evento
-            fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.ENEMY_FIRES, pos = proj_pos, dir = self.__last_movement)
+            fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.ENEMY_FIRES, pos = proj_pos, dir = self.__last_movement, dmg = self.__damage)
             #Lanzamos el evento a la cola
             pygame.event.post(fire_event)
     
-
-    @property
-    def image(self):
-        return self.__image
 
     def move_towards_player(self, hero_pos, delta_time):
         direction = hero_pos - self._pos
@@ -160,3 +156,16 @@ class Enemy(GameObject, ReusableObject):
             self.__direction = direction.normalize()
 
         self._pos += self.__direction * self.__speed * delta_time
+        
+
+    @property
+    def image(self):
+        return self.__image
+
+    @property
+    def life(self):
+        return self.__life
+
+    @life.setter
+    def life(self, value):
+        self.__life = value

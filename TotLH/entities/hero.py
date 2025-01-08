@@ -31,6 +31,10 @@ class Hero(GameObject):
 
         self.__last_direction = "up"
 
+        self.__life = cfg_item("hero", "stats", "life")
+        self.__damage = cfg_item("hero", "stats", "damage")
+        self.__arrow_damage = cfg_item("projectiles", "allied", "stats", "damage")
+
     
     def __del__(self):
         pass
@@ -101,12 +105,24 @@ class Hero(GameObject):
     
 
         #Creamos el evento
-        fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.HERO_FIRES, pos = proj_pos, dir = self.__last_direction)
+        fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.HERO_FIRES, pos = proj_pos, dir = self.__last_direction, dmg = self.__arrow_damage)
         #Lanzamos el evento a la cola
         pygame.event.post(fire_event)
 
     @property
     def image(self):
         return self.__image_resized
+
+    @property
+    def damage(self):
+        return self.__damage
+
+    @property
+    def life(self):
+        return self.__life
+
+    @life.setter
+    def life(self, value):
+        self.__life = value
 
 

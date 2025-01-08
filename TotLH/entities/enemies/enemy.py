@@ -53,6 +53,7 @@ class Enemy(GameObject, ReusableObject):
     def __load_data(self, enemy_str): 
         self.__speed = cfg_item("enemy", enemy_str, "stats", "speed")
         self.__life = cfg_item("enemy", enemy_str, "stats", "life")
+        self.__max_health = cfg_item("enemy", enemy_str, "stats", "life")
         self.__damage = cfg_item("enemy", enemy_str, "stats", "damage")
         self.__fire_rate = cfg_item("enemy", enemy_str, "stats", "fire_rate")
 
@@ -99,6 +100,7 @@ class Enemy(GameObject, ReusableObject):
 
     def render(self, screen):
         screen.blit(self.__image, self._pos)
+        self.draw_health_bar(screen)
 
     #def __fire(self):
     #    if random.random() < self.__fire_Rate:
@@ -160,8 +162,29 @@ class Enemy(GameObject, ReusableObject):
 
     def take_damage(self, damage):
         self.__life -= damage
+        print(self.__life)
         if self.__life <= 0:
             self.kill()
+    
+
+
+
+    def draw_health_bar(self, screen):
+        # Calcular proporción de vida restante
+        health_ratio = self.__life / self.__max_health
+        bar_width = self.rect.width
+        bar_height = 5
+        bar_x = self.rect.left
+        bar_y = self.rect.top - 10  # Ubicar la barra encima del enemigo
+
+        # Dibujar fondo de la barra (rojo)
+        pygame.draw.rect(screen, (255, 0, 0), (bar_x, bar_y, bar_width, bar_height))
+        # Dibujar vida restante (verde)
+        pygame.draw.rect(screen, (0, 255, 0), (bar_x, bar_y, bar_width * health_ratio, bar_height))
+
+
+
+
 
     @property
     def image(self):

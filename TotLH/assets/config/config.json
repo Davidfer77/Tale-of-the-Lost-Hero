@@ -75,6 +75,20 @@
             }
         }
     },
+    "life_bar" : {
+        "font_path" : "TotLH.assets.fonts",
+        "font_filename" : "alagard.ttf",
+        "config" : {
+            "bar_width" : 200,
+            "bar_height" : 20,
+            "bar_x" : 20,
+            "bar_y" : 20,
+            "rect_edge" : 2,
+            "text_size" : 30,
+            "text_separation" : 10,
+            "color" : [255, 255, 255]
+        }
+    },
     "hero" : {
         "image" : {
             "path" : "TotLH.assets.images",
@@ -95,7 +109,7 @@
                 "size" : [60, 90]
             },
             "stats" : {
-                "life" : 40,
+                "life" : 70,
                 "speed" : 0.1,
                 "damage" : 20,
                 "fire_rate" : 0.01

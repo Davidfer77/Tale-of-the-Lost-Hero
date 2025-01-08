@@ -32,6 +32,7 @@ class Hero(GameObject):
         self.__last_direction = "up"
 
         self.__life = cfg_item("hero", "stats", "life")
+        self.__max_health = cfg_item("hero", "stats", "life")
         self.__damage = cfg_item("hero", "stats", "damage")
         self.__arrow_damage = cfg_item("projectiles", "allied", "stats", "damage")
 
@@ -86,7 +87,7 @@ class Hero(GameObject):
     
     def render(self, screen):
         screen.blit(self.__image_resized, (self._pos.x, self._pos.y))
-
+        self.draw_player_health_bar(screen)
         
     def __fire(self):
         proj_pos = pygame.math.Vector2(self._pos.x + self.__image_half_width, self._pos.y + self.__image_half_height)
@@ -112,6 +113,33 @@ class Hero(GameObject):
 
     def take_damage(self, damage):
         self.__life -= damage
+
+
+
+    def draw_player_health_bar(self, screen):
+        # Configuración de la barra
+        bar_width = cfg_item("life_bar", "config", "bar_width")
+        bar_height = cfg_item("life_bar", "config", "bar_height")
+        bar_x = cfg_item("life_bar", "config", "bar_x")
+        bar_y = cfg_item("life_bar", "config", "bar_y")
+
+        # Calcular proporción de vida restante
+        health_ratio = self.__life / self.__max_health
+
+        # Dibujar fondo de la barra (rojo)
+        pygame.draw.rect(screen, (255, 0, 0), (bar_x, bar_y, bar_width, bar_height))
+        # Dibujar vida restante (verde)
+        pygame.draw.rect(screen, (0, 255, 0), (bar_x, bar_y, bar_width * health_ratio, bar_height))
+
+        # Dibujar borde de la barra
+        pygame.draw.rect(screen, (0, 0, 0), (bar_x, bar_y, bar_width, bar_height), cfg_item("life_bar", "config", "rect_edge"))
+
+        # Dibujar texto numérico
+        font = pygame.font.Font(None, cfg_item("life_bar", "config", "text_size"))  # Fuente por defecto
+        text = font.render(f"{self.__life}/{self.__max_health}", True, (255, 255, 255))
+        screen.blit(text, (bar_x + bar_width + cfg_item("life_bar", "config", "text_separation"), bar_y)) 
+
+
 
     @property
     def image(self):

@@ -130,9 +130,10 @@
             "size" : [75, 100]
         },
         "stats" : {
-            "life" : 200,
+            "life" : 250,
             "speed" : 0.25,
-            "damage" : 20
+            "damage" : 20,
+            "cooldown" : 500
         }
     },
     "enemy" : {
@@ -147,7 +148,8 @@
                 "speed" : 0.08,
                 "damage" : 20,
                 "fire_rate" : 0.0,
-                "score" : 50
+                "score" : 50,
+                "cooldown" : 1500
             }
         },
         "predator" : {
@@ -161,7 +163,8 @@
                 "speed" : 0.2,
                 "damage" : 50,
                 "fire_rate" : 0.0,
-                "score" : 75
+                "score" : 75,
+                "cooldown" : 1500
             }
         },
         "shadow" : {
@@ -174,8 +177,9 @@
                 "life" : 75,
                 "speed" : 0.05,
                 "damage" : 35,
-                "fire_rate" : 0.1,
-                "score" : 100
+                "fire_rate" : 0.05,
+                "score" : 100,
+                "cooldown" : 1500
             }
         },
         "devil" : {
@@ -189,7 +193,8 @@
                 "speed" : 0.02,
                 "damage" : 75,
                 "fire_rate" : 0.05,
-                "score" : 1000
+                "score" : 1000,
+                "cooldown" : 1500
             }
         }
     },

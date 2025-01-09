@@ -8,3 +8,4 @@ class Events(Enum):
     EXPLOSION_ENDS = 4, # parameter expl = instance of the explosion
     HERO_MOVES = 5, # parameter hero_pos = position of the player
     ENEMY_SLAINED = 6, # parameter score = enemy scorepoints
+

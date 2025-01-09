@@ -50,13 +50,18 @@ class GamePlay(State):
             self.__players.handle_input(event.key, True)
         elif event.type == pygame.KEYUP:
             self.__players.handle_input(event.key, False)
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            for player, enemies in pygame.sprite.groupcollide(self.__players, self.__enemies, False, False).items():
+                if player.attack_cooldown <= 0.0:
+                    player.melee_attack()
+                    for enemy in enemies:
+                        enemy.take_damage(player.damage)
 
-        elif event.type == pygame.MOUSEBUTTONDOWN: #GESTIONADO CON EL CLICK DEL RATON
-            self.__explosions.add(Explosion(event.pos))
+
 
 
     def handle_events(self, event):
-        self.__handle_events(event) # Mandamos el evento a la funcion que los gestionara (handle_events)
+        self.__handle_events(event)
  
         self.__players.handle_events(event)
         self.__projectiles_allied.handle_events(event)
@@ -90,17 +95,13 @@ class GamePlay(State):
         self.__scorepoints.render(screen)
 
 
-    def __handle_events(self, event): # Gestionamos la reaccion a cada evento
+    def __handle_events(self, event):
         if event.event == Events.HERO_FIRES:
             self.__projectiles_allied.add(ProjectileFactory.create_projectile(ProjectileType.Allied, event.pos, event.dir, event.dmg))
         
         elif event.event == Events.PROJECTILE_OUT_OF_SCREEN:
             self.__projectiles_allied.remove(event.proj)
             self.__projectiles_enemy.remove(event.proj)
-
-        #elif event.event == Events.ENEMY_OUT_OF_SCREEN:
-        #    self.__enemy_pool.release(event.enemy)
-        #    self.__enemies.remove(event.enemy)
 
         elif event.event == Events.ENEMY_FIRES:
             self.__projectiles_enemy.add(ProjectileFactory.create_projectile(ProjectileType.Enemy, event.pos, event.dir, event.dmg))
@@ -159,10 +160,10 @@ class GamePlay(State):
                 enemy.take_damage(projectile.damage)
 
 
-        for player, enemies in pygame.sprite.groupcollide(self.__players, self.__enemies, True, True).items():
-            # self.__spawn_explosion(player.half_size_pos)
-
-            #for enemy in enemies:
-                #self.__spawn_explosion(enemy.half_size_pos)
-            
-            self.__game_over()
+        for player, enemies in pygame.sprite.groupcollide(self.__players, self.__enemies, False, False).items():
+            for enemy in enemies:
+                if enemy.attack_cooldown <= 0.0:
+                    player.take_damage(enemy.damage)
+                    enemy.melee_attack()
+                    if player.life <= 0:
+                        self.__game_over()

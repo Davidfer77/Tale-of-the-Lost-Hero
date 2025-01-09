@@ -28,3 +28,11 @@ class RenderGroup(pygame.sprite.Group):
     def add_points(self, score):
         for sprite in self.sprites():
             sprite.add_points(score)
+
+    def melee_attack(self):
+        for sprite in self.sprites():
+            sprite.melee_attack()
+
+    def take_damage(self, damage):
+        for sprite in self.sprites():
+            sprite.take_damage(damage)

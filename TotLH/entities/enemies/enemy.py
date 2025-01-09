@@ -29,6 +29,7 @@ class Enemy(GameObject, ReusableObject):
         Enemy.__devil_image = self.__load_image(Enemy.__devil_image, "devil")
 
         self.__fire_cooldown = 0
+        self.__attack_cooldown = 0
 
         self.__moving = {
             "left" : False,
@@ -51,12 +52,14 @@ class Enemy(GameObject, ReusableObject):
 
 
     def __load_data(self, enemy_str): 
+        self.__max_speed = cfg_item("enemy", enemy_str, "stats", "speed")
         self.__speed = cfg_item("enemy", enemy_str, "stats", "speed")
         self.__life = cfg_item("enemy", enemy_str, "stats", "life")
         self.__max_health = cfg_item("enemy", enemy_str, "stats", "life")
         self.__damage = cfg_item("enemy", enemy_str, "stats", "damage")
         self.__fire_rate = cfg_item("enemy", enemy_str, "stats", "fire_rate")
         self.__enemy_score = cfg_item("enemy", enemy_str, "stats", "score")
+        self.__attack_max_cooldown = cfg_item("enemy", enemy_str, "stats", "cooldown")
 
     def reset(self):
         self.__enemy_type = None
@@ -94,7 +97,10 @@ class Enemy(GameObject, ReusableObject):
 
         if self.__fire_cooldown >= 0.0:
             self.__fire_cooldown -= delta_time
-        
+
+        if self.__attack_cooldown >= 0.0:
+            self.__attack_cooldown -= delta_time
+
         self._rect_sync()
 
     def render(self, screen):
@@ -131,6 +137,10 @@ class Enemy(GameObject, ReusableObject):
         self._pos += self.__direction * self.__speed * delta_time
 
 
+    def melee_attack(self):
+        self.__attack_cooldown = self.__attack_max_cooldown
+
+
     def take_damage(self, damage):
         self.__life -= damage
         if self.__life <= 0:
@@ -161,3 +171,11 @@ class Enemy(GameObject, ReusableObject):
     @life.setter
     def life(self, value):
         self.__life = value
+
+    @property
+    def damage(self):
+        return self.__damage
+
+    @property
+    def attack_cooldown(self):
+        return self.__attack_cooldown

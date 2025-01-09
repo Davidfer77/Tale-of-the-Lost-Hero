@@ -28,6 +28,7 @@ class Hero(GameObject):
 
 
         self.__arrow_cooldown = 0
+        self.__attack_cooldown = 0
 
         self.__last_direction = "up"
 
@@ -82,6 +83,9 @@ class Hero(GameObject):
         
         if self.__arrow_cooldown >= 0.0:
             self.__arrow_cooldown -= delta_time
+
+        if self.__attack_cooldown >= 0.0:
+            self.__attack_cooldown -= delta_time
         
         self._rect_sync()
     
@@ -113,6 +117,10 @@ class Hero(GameObject):
 
     def take_damage(self, damage):
         self.__life -= damage
+
+
+    def melee_attack(self):
+        self.__attack_cooldown = cfg_item("hero", "stats", "cooldown")
 
 
 
@@ -150,4 +158,7 @@ class Hero(GameObject):
     def life(self, value):
         self.__life = value
 
+    @property
+    def attack_cooldown(self):
+        return self.__attack_cooldown
 

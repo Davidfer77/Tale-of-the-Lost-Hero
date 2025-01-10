@@ -7,7 +7,29 @@
     "scenario" : {
         "intro" : {
             "path" : "TotLH.assets.images",
-            "filename" : "intro_screen.png"
+            "filename" : "intro_screen.png",
+            "buttons" : {
+                "text_color" : [255, 255, 255],
+                "font" : {
+                    "path" : "",
+                    "size" : 40
+                },
+                "story_mode" : {
+                    "color" : [50, 200, 50],
+                    "text" : "STORY MODE (SOON)",
+                    "rectangle" : [150, 300, 420, 50]
+                },
+                "survival_mode" : {
+                    "color" : [50, 50, 200],
+                    "text" : "SURVIVAL MODE",
+                    "rectangle" : [150, 400, 420, 50]
+                },
+                "exit" : {
+                    "color" : [200, 50, 50],
+                    "text" : "EXIT",
+                    "rectangle" : [250, 500, 220, 50]
+                }
+            }
         },
         "bg_1" : {
             "path" : "TotLH.assets.images",
@@ -62,7 +84,7 @@
         }
     },
     "damagetext" : {
-        "size" : 30,
+        "size" : 20,
         "move_speed" : 10,
         "duration" : 1000,
         "color" : [255, 0, 0]
@@ -109,7 +131,7 @@
             "bar_x" : 20,
             "bar_y" : 20,
             "rect_edge" : 2,
-            "text_size" : 30,
+            "text_size" : 20,
             "text_separation" : 10,
             "color" : [255, 255, 255]
         }

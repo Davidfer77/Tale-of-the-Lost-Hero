@@ -9,7 +9,8 @@ class DamageText(GameObject):
 
     def __init__(self, text, pos, color=cfg_item("damagetext", "color"), duration=cfg_item("damagetext", "duration"), move_speed=cfg_item("damagetext", "move_speed")):
         super().__init__()
-        self.__font = pygame.font.SysFont(None, cfg_item("damagetext", "size"))
+        with resources.path(cfg_item("fonts", "text", "path"), cfg_item("fonts", "text", "filename")) as instructions_path:
+            self.__font = pygame.font.Font(instructions_path, cfg_item("damagetext", "size"))
         self.__text = str(text)
         self.__color = color
         self.__image = self.__font.render(self.__text, True, self.__color)
@@ -19,6 +20,7 @@ class DamageText(GameObject):
         self.__max_duration = duration
         self.__move_speed = move_speed
         self.__alpha = 255
+
 
     def update(self, delta_time):
         self.__rect.y -= self.__move_speed * delta_time

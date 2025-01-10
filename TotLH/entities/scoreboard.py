@@ -10,6 +10,9 @@ class Scoreboard(GameObject):
         super().__init__()
         self.__score = 0
 
+        with resources.path(cfg_item("fonts", "text", "path"), cfg_item("fonts", "text", "filename")) as instructions_path:
+            self.__font = pygame.font.Font(instructions_path, cfg_item("scoreboard", "config", "text_size"))
+
     def handle_events(self, event):
         pass
 
@@ -20,8 +23,7 @@ class Scoreboard(GameObject):
         pass
 
     def render(self, screen):
-        font = pygame.font.Font(None, cfg_item("scoreboard", "config", "text_size")) 
-        text = font.render(str(self.__score), True, cfg_item("scoreboard", "config", "color"))  
+        text = self.__font.render(str(self.__score), True, cfg_item("scoreboard", "config", "color"))  
 
         text_width, text_height = text.get_size()
 

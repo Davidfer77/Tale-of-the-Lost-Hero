@@ -26,6 +26,8 @@ class Hero(GameObject):
             "down" : False
         }
 
+        with resources.path(cfg_item("fonts", "text", "path"), cfg_item("fonts", "text", "filename")) as instructions_path:
+            self.__font = pygame.font.Font(instructions_path, cfg_item("life_bar", "config", "text_size"))
 
         self.__arrow_cooldown = 0
         self.__attack_cooldown = 0
@@ -135,8 +137,7 @@ class Hero(GameObject):
         pygame.draw.rect(screen, (0, 255, 0), (bar_x, bar_y, bar_width * health_ratio, bar_height))
         pygame.draw.rect(screen, (0, 0, 0), (bar_x, bar_y, bar_width, bar_height), cfg_item("life_bar", "config", "rect_edge"))
 
-        font = pygame.font.Font(None, cfg_item("life_bar", "config", "text_size"))  
-        text = font.render(f"{self.__life}/{self.__max_health}", True, (255, 255, 255))
+        text = self.__font.render(f"{self.__life}/{self.__max_health}", True, (255, 255, 255))
         screen.blit(text, (bar_x + bar_width + cfg_item("life_bar", "config", "text_separation"), bar_y)) 
 
 

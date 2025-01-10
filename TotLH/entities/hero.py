@@ -17,7 +17,7 @@ class Hero(GameObject):
         
         screen_size = cfg_item("game","screen_size")
 
-        self._pos = pygame.math.Vector2(screen_size[0] / 2 - self.__image_half_width, screen_size[1] / 2 - self.__image_half_height)
+        self._pos = pygame.math.Vector2(screen_size[0] / 2 - self.__image_half_width, screen_size[1] - self.__image_half_height * 2)
 
         self.__moving = {
             "left" : False,

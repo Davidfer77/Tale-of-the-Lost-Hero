@@ -47,8 +47,10 @@ class Intro(State):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: 
             action = self.handle_menu_click(event.pos)
             if action == "story_mode":
-                pass # Soon available
+                self.next_state = States.Scenario1
+                self.done = True
             elif action == "survival_mode":
+                self.next_state = States.GamePlay
                 self.done = True
             elif action == "exit":
                 pygame.quit()

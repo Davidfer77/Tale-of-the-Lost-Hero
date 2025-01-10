@@ -46,7 +46,7 @@
             "path" : "TotLH.assets.images",
             "filename" : "background1.png", 
             "enemy_spawn_prob" : 0.005,
-            "maximum_score" : 1000,
+            "maximum_score" : 10,
             "enemy_spawn_weight" : {
                 "skeleton" : 80,
                 "predator" : 20,
@@ -58,7 +58,7 @@
             "path" : "TotLH.assets.images",
             "filename" : "background2.png", 
             "enemy_spawn_prob" : 0.01,
-            "maximum_score" : 1000,
+            "maximum_score" : 10,
             "enemy_spawn_weight" : {
                 "skeleton" : 60,
                 "predator" : 15,
@@ -217,7 +217,7 @@
                 "size" : [200, 200]
             },
             "stats" : {
-                "life" : 500,
+                "life" : 50,
                 "speed" : 0.02,
                 "damage" : 75,
                 "fire_rate" : 0.05,

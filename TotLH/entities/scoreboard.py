@@ -41,4 +41,8 @@ class Scoreboard(GameObject):
     
     def add_points(self, score):
         self.__score += score
+    
+    @property
+    def score(self):
+        return self.__score
 

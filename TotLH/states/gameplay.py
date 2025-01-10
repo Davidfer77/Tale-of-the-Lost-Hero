@@ -5,6 +5,7 @@ import pygame
 from TotLH.states.state import State
 from TotLH.states.states import States
 from TotLH.entities.hero import Hero
+from TotLH.entities.damagetext import DamageText
 from TotLH.entities.pool import Pool
 from TotLH.events import Events
 from TotLH.config import cfg_item
@@ -27,6 +28,7 @@ class GamePlay(State):
         self.__explosions = RenderGroup()
 
         self.__scorepoints = RenderGroup()
+        self.__damagetext = RenderGroup()
 
         self.next_state = States.GameOver
 
@@ -55,7 +57,9 @@ class GamePlay(State):
                 if player.attack_cooldown <= 0.0:
                     player.melee_attack()
                     for enemy in enemies:
+                        self.__damagetext.add(DamageText(player.damage, enemy.position))
                         enemy.take_damage(player.damage)
+
 
 
 
@@ -70,6 +74,7 @@ class GamePlay(State):
         self.__explosions.handle_events(event)
 
         self.__scorepoints.handle_events(event)
+        self.__damagetext.handle_events(event)
 
 
     def update(self, delta_time):
@@ -83,6 +88,7 @@ class GamePlay(State):
         self.__detect_colissions()
 
         self.__scorepoints.update(delta_time)
+        self.__damagetext.update(delta_time)
 
 
     def render(self, screen):
@@ -93,6 +99,7 @@ class GamePlay(State):
         self.__explosions.render(screen)
 
         self.__scorepoints.render(screen)
+        self.__damagetext.render(screen)
 
 
     def __handle_events(self, event):
@@ -151,18 +158,21 @@ class GamePlay(State):
             self.__spawn_explosion(player.half_size_pos)
             for projectile in projectiles:
                 player.take_damage(projectile.damage)
+                self.__damagetext.add(DamageText(projectile.damage, player.position))
                 if player.life <= 0:
                     self.__game_over()
 
         for enemy, projectiles in pygame.sprite.groupcollide(self.__enemies, self.__projectiles_allied, False, True).items():
             # self.__spawn_explosion(enemy.half_size_pos)
             for projectile in projectiles:
+                self.__damagetext.add(DamageText(projectile.damage, enemy.position))
                 enemy.take_damage(projectile.damage)
 
 
         for player, enemies in pygame.sprite.groupcollide(self.__players, self.__enemies, False, False).items():
             for enemy in enemies:
                 if enemy.attack_cooldown <= 0.0:
+                    self.__damagetext.add(DamageText(enemy.damage, player.position))
                     player.take_damage(enemy.damage)
                     enemy.melee_attack()
                     if player.life <= 0:

@@ -123,7 +123,6 @@ class Hero(GameObject):
         self.__attack_cooldown = cfg_item("hero", "stats", "cooldown")
 
 
-
     def draw_player_health_bar(self, screen):
         bar_width = cfg_item("life_bar", "config", "bar_width")
         bar_height = cfg_item("life_bar", "config", "bar_height")

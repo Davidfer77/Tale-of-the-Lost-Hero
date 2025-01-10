@@ -61,6 +61,12 @@
             "filename" : "gameover.png"
         }
     },
+    "damagetext" : {
+        "size" : 30,
+        "move_speed" : 10,
+        "duration" : 1000,
+        "color" : [255, 0, 0]
+    },
     "fonts" : {
         "title" : {
             "path" : "TotLH.assets.fonts",

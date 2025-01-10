@@ -31,12 +31,6 @@ class Enemy(GameObject, ReusableObject):
         self.__fire_cooldown = 0
         self.__attack_cooldown = 0
 
-        self.__moving = {
-            "left" : False,
-            "right" : False,
-            "up" : False,
-            "down" : False
-        }
 
         self.__last_movement = "down"
 
@@ -52,7 +46,6 @@ class Enemy(GameObject, ReusableObject):
 
 
     def __load_data(self, enemy_str): 
-        self.__max_speed = cfg_item("enemy", enemy_str, "stats", "speed")
         self.__speed = cfg_item("enemy", enemy_str, "stats", "speed")
         self.__life = cfg_item("enemy", enemy_str, "stats", "life")
         self.__max_health = cfg_item("enemy", enemy_str, "stats", "life")
@@ -89,10 +82,6 @@ class Enemy(GameObject, ReusableObject):
         pass
 
     def update(self, delta_time):
-        #if self._pos.y > cfg_item("game", "screen_size")[1]:
-        #    out_of_screen_event = pygame.event.Event(pygame.USEREVENT, event = Events.ENEMY_OUT_OF_SCREEN, enemy = self)
-        #    pygame.event.post(out_of_screen_event)
-        
         self.__fire()
 
         if self.__fire_cooldown >= 0.0:

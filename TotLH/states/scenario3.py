@@ -34,6 +34,9 @@ class Scenario3(State):
 
         self.next_state = States.Intro
 
+        self.__screen_size = cfg_item("game","screen_size")
+        self.__devil_added = False
+
         self.__clock = pygame.time.Clock()
 
         with resources.path(cfg_item("scenario","scenario3", "path"), cfg_item("scenario", "scenario3", "filename")) as scenario3_image_path:
@@ -52,6 +55,7 @@ class Scenario3(State):
         self.__projectiles_allied.empty()
         self.__projectiles_enemy.empty()
         self.__explosions.empty()
+        self.__devil_added = False
 
     def handle_input(self, event):
         if event.type == pygame.KEYDOWN:
@@ -136,27 +140,15 @@ class Scenario3(State):
              
 
     def __spawn_enemy(self):
-        if random.random() < cfg_item("scenario", "scenario3", "enemy_spawn_prob"):
-            enemy_list = [EnemyType.Skeleton, EnemyType.Predator, EnemyType.Shadow, EnemyType.Devil]
-            enemy_prob = [cfg_item("scenario", "scenario3", "enemy_spawn_weight", "skeleton"), cfg_item("scenario", "scenario3", "enemy_spawn_weight", "predator"), \
-                          cfg_item("scenario", "scenario3", "enemy_spawn_weight", "shadow"), cfg_item("scenario", "scenario3", "enemy_spawn_weight", "devil")]
-            enemy_type = random.choices(enemy_list, enemy_prob, k=1)[0]
-
-            padding_x = max(cfg_item("enemy", "skeleton", "image", "size")[0], cfg_item("enemy", "predator", "image", "size")[0],\
-                           cfg_item("enemy", "shadow", "image", "size")[0], cfg_item("enemy", "devil", "image", "size")[0])
-
-            x = random.randint(0, cfg_item("game", "screen_size")[0] - padding_x)
-
-            padding_y= max(cfg_item("enemy", "skeleton", "image", "size")[1], cfg_item("enemy", "predator", "image", "size")[1],\
-                           cfg_item("enemy", "shadow", "image", "size")[1], cfg_item("enemy", "devil", "image", "size")[1])
-            
-            spawn_pos = pygame.math.Vector2(x, -padding_y)
-
+        if self.__devil_added == False:
+            enemy_type = EnemyType.Devil
+            # spawn_pos = pygame.math.Vector2(self.__screen_size[0] / 2 - cfg_item("enemy", "devil", "image", "size")[0] / 2, self.__screen_size[1] / 2 - cfg_item("enemy", "devil", "image", "size")[1] / 2)
+            spawn_pos = pygame.math.Vector2(0.0 , 0.0)
             enemy = self.__enemy_pool.acquire()
-
             enemy.init(enemy_type, spawn_pos)
 
             self.__enemies.add(enemy)
+            self.__devil_added = True
     
     def __spawn_explosion(self, position):
         self.__explosions.add(Explosion(position))

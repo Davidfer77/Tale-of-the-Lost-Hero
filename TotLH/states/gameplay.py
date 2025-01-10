@@ -34,7 +34,11 @@ class GamePlay(State):
 
         self.__clock = pygame.time.Clock()
 
-    
+        with resources.path(cfg_item("scenario","bg_1", "path"), cfg_item("scenario", "bg_1", "filename")) as bg1_image_path:
+            self.__background1=pygame.image.load(bg1_image_path).convert_alpha()
+            self.__background1_resized = pygame.transform.scale(self.__background1, cfg_item("game", "screen_size")).convert_alpha()
+
+
     def enter(self):
         self.__players.add(Hero())
         self.__scorepoints.add(Scoreboard())
@@ -92,6 +96,8 @@ class GamePlay(State):
 
 
     def render(self, screen):
+        screen.blit(self.__background1_resized,(0,0))
+
         self.__enemies.render(screen)
         self.__players.render(screen)
         self.__projectiles_allied.render(screen)

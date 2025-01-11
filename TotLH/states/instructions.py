@@ -12,7 +12,6 @@ class Instructions(State):
         super().__init__()
         self.next_state = States.Intro
 
-        # Instructions text
         with resources.path(cfg_item("fonts", "instructions", "path"), cfg_item("fonts", "instructions", "filename")) as instructions_path:
             gameplay_font = pygame.font.Font(instructions_path, cfg_item("fonts", "instructions", "config", "gameplay_size"))
             instructions_font = pygame.font.Font(instructions_path, cfg_item("fonts", "instructions", "config", "instructions_size"))

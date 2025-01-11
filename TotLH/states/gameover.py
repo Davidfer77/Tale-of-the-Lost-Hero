@@ -10,20 +10,17 @@ class GameOver(State):
         super().__init__()
         self.next_state = States.Intro
 
-        # Videogame name text
-        with resources.path(cfg_item("fonts", "gameover", "path"), cfg_item("fonts", "gameover", "filename")) as name_path:
-            name = pygame.font.Font(name_path, cfg_item("fonts", "gameover", "config", "gameover_size"))
-        # Instructions text
+        with resources.path(cfg_item("fonts", "gameover", "path"), cfg_item("fonts", "gameover", "filename")) as gameover_path:
+            gameover = pygame.font.Font(gameover_path, cfg_item("fonts", "gameover", "config", "gameover_size"))
         with resources.path(cfg_item("fonts", "gameover", "path"), cfg_item("fonts", "gameover", "filename")) as instructions_path:
             instructions = pygame.font.Font(instructions_path, cfg_item("fonts", "gameover", "config", "instructions_size"))
 
-        # Intro image
-        with resources.path(cfg_item("scenario", "gameover", "path"), cfg_item("scenario", "gameover", "filename")) as intro_image_path:
-            intro_image=pygame.image.load(intro_image_path).convert_alpha()
-            self.__intro_image_resized = pygame.transform.scale(intro_image, cfg_item("game", "screen_size")).convert_alpha()
+        with resources.path(cfg_item("scenario", "gameover", "path"), cfg_item("scenario", "gameover", "filename")) as gameover_image_path:
+            gameover_image=pygame.image.load(gameover_image_path).convert_alpha()
+            self.__gameover_image_resized = pygame.transform.scale(gameover_image, cfg_item("game", "screen_size")).convert_alpha()
 
 
-        self.__name_text = name.render(cfg_item("fonts", "gameover", "config", "gameover"), True, cfg_item("fonts", "gameover", "config", "color"))
+        self.__gameover_text = gameover.render(cfg_item("fonts", "gameover", "config", "gameover"), True, cfg_item("fonts", "gameover", "config", "color"))
         self.__instructions_text = instructions.render(cfg_item("fonts", "gameover", "config", "instructions"), True, cfg_item("fonts", "gameover", "config", "color"))
 
     def __del__(self):
@@ -46,6 +43,6 @@ class GameOver(State):
         pass
 
     def render(self, screen):
-        screen.blit(self.__intro_image_resized,(0,0))
-        screen.blit(self.__name_text, cfg_item("fonts", "gameover", "config", "gameover_pos"))
+        screen.blit(self.__gameover_image_resized,(0,0))
+        screen.blit(self.__gameover_text, cfg_item("fonts", "gameover", "config", "gameover_pos"))
         screen.blit(self.__instructions_text, cfg_item("fonts", "gameover", "config", "instructions_pos"))

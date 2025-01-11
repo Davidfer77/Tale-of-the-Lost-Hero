@@ -81,6 +81,10 @@
         "gameover" : {
             "path" : "TotLH.assets.images",
             "filename" : "gameover.png"
+        },
+        "congratulations" : {
+            "path" : "TotLH.assets.images",
+            "filename" : "congratulations.png"
         }
     },
     "damagetext" : {
@@ -137,6 +141,19 @@
                 "instructions_size" : 30,
                 "color" : [0, 0, 0]
             }
+        },
+        "congratulations" : {
+            "path" : "TotLH.assets.fonts",
+            "filename" : "alagard.ttf",
+            "config" : {
+                "congratulations" : "CONGRATULATIONS",
+                "congratulations_pos" : [40, 230],
+                "congratulations_size" : 75,
+                "text" : "You have saved the world from evil",
+                "text_pos" : [120, 320],
+                "text_size" : 30,
+                "color" : [0, 0, 0]
+            }
         }
     },
     "life_bar" : {
@@ -169,7 +186,7 @@
     "hero" : {
         "image" : {
             "path" : "TotLH.assets.images",
-            "filename" : "hero_try5.png",
+            "filename" : "hero.png",
             "size" : [75, 100]
         },
         "stats" : {

@@ -8,4 +8,5 @@ class States(Enum):
     Scenario1 = 4,
     Scenario2 = 5,
     Scenario3 = 6,
-    GameOver = 7
+    GameOver = 7,
+    Congratulations = 8

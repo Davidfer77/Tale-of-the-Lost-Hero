@@ -32,7 +32,7 @@ class Scenario3(State):
 
         self.__max_score = cfg_item("scenario", "scenario3", "maximum_score")
 
-        self.next_state = States.Intro
+        self.next_state = States.Congratulations
 
         self.__screen_size = cfg_item("game","screen_size")
         self.__devil_added = False

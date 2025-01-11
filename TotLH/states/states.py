@@ -3,8 +3,9 @@ from enum import Enum
 
 class States(Enum):
     Intro = 1,
-    GamePlay = 2,
-    Scenario1 = 3,
-    Scenario2 = 4,
-    Scenario3 = 5,
-    GameOver = 6
+    Instructions = 2,
+    GamePlay = 3,
+    Scenario1 = 4,
+    Scenario2 = 5,
+    Scenario3 = 6,
+    GameOver = 7

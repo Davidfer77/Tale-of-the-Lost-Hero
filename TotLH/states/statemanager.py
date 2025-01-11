@@ -1,6 +1,7 @@
 import pygame
 from TotLH.states.intro import Intro
 from TotLH.states.gameplay import GamePlay
+from TotLH.states.instructions import Instructions
 from TotLH.states.scenario1 import Scenario1
 from TotLH.states.scenario2 import Scenario2
 from TotLH.states.scenario3 import Scenario3
@@ -13,6 +14,7 @@ class StateManager:
     def __init__(self):
         self.__states = {
             States.Intro : Intro(),
+            States.Instructions : Instructions(),
             States.GamePlay : GamePlay(),
             States.Scenario1 : Scenario1(),
             States.Scenario2 : Scenario2(),

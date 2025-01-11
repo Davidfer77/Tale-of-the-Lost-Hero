@@ -6,10 +6,12 @@ from TotLH.states.state import State
 from TotLH.states.states import States
 
 class Intro(State):
+    second_next_state = States.Instructions
 
     def __init__(self):
         super().__init__()
-        self.next_state = States.GamePlay
+        self.next_state = States.Instructions
+        second_next_state = States.Instructions
 
         # Videogame name text
         with resources.path(cfg_item("fonts", "title", "path"), cfg_item("fonts", "title", "filename")) as name_path:
@@ -47,10 +49,10 @@ class Intro(State):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: 
             action = self.handle_menu_click(event.pos)
             if action == "story_mode":
-                self.next_state = States.Scenario1
+                Intro.second_next_state = States.Scenario1
                 self.done = True
             elif action == "survival_mode":
-                self.next_state = States.GamePlay
+                Intro.second_next_state = States.GamePlay
                 self.done = True
             elif action == "exit":
                 pygame.quit()

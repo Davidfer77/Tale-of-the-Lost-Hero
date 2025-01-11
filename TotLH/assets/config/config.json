@@ -110,6 +110,21 @@
                 "color" : [0, 0, 0]
             }
         },
+        "instructions" : {
+            "path" : "TotLH.assets.fonts",
+            "filename" : "alagard.ttf",
+            "config" : {
+                "melee_attack" : "Press ENTER to melee attack",
+                "melee_attack_pos" : [100, 150],
+                "arrows" : "Press SPACE to shoot an arrow",
+                "arrows_pos" : [80, 300],
+                "gameplay_size" : 40,
+                "instructions" : "Press any key to start",
+                "instructions_pos" : [250, 575],
+                "instructions_size" : 20,
+                "color" : [255, 255, 255]
+            }
+        },
         "gameover" : {
             "path" : "TotLH.assets.fonts",
             "filename" : "alagard.ttf",

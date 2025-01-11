@@ -88,8 +88,8 @@ class Scenario3(State):
 
 
     def update(self, delta_time):
-        self.__spawn_enemy()
         self.__players.update(delta_time)
+        self.__spawn_enemy()
         self.__projectiles_allied.update(delta_time)
         self.__enemies.update(delta_time)
         self.__projectiles_enemy.update(delta_time)
@@ -142,8 +142,8 @@ class Scenario3(State):
     def __spawn_enemy(self):
         if self.__devil_added == False:
             enemy_type = EnemyType.Devil
-            # spawn_pos = pygame.math.Vector2(self.__screen_size[0] / 2 - cfg_item("enemy", "devil", "image", "size")[0] / 2, self.__screen_size[1] / 2 - cfg_item("enemy", "devil", "image", "size")[1] / 2)
-            spawn_pos = pygame.math.Vector2(0.0 , 0.0)
+            spawn_pos = pygame.math.Vector2(self.__screen_size[0] / 2 - cfg_item("enemy", "devil", "image", "size")[0] / 2, self.__screen_size[1] / 2 - cfg_item("enemy", "devil", "image", "size")[1] / 2)
+            #spawn_pos = pygame.math.Vector2(0.0 , 0.0)
             enemy = self.__enemy_pool.acquire()
             enemy.init(enemy_type, spawn_pos)
 

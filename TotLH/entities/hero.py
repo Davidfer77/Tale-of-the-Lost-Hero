@@ -39,6 +39,15 @@ class Hero(GameObject):
         self.__damage = cfg_item("hero", "stats", "damage")
         self.__arrow_damage = cfg_item("projectiles", "allied", "stats", "damage")
 
+
+        with resources.path(cfg_item("sounds", "sword_attack", "path"), cfg_item("sounds", "sword_attack", "filename")) as sound_path:
+            self.__sword_attack_sound = pygame.mixer.Sound(sound_path)
+            self.__sword_attack_sound.set_volume(cfg_item("sounds", "sword_attack", "volume"))
+
+        with resources.path(cfg_item("sounds", "arrow_shot", "path"), cfg_item("sounds", "arrow_shot", "filename")) as sound_path:
+            self.__arrow_shot_sound = pygame.mixer.Sound(sound_path)
+            self.__arrow_shot_sound.set_volume(cfg_item("sounds", "arrow_shot", "volume"))
+
     
     def __del__(self):
         pass
@@ -96,6 +105,7 @@ class Hero(GameObject):
         self.draw_player_health_bar(screen)
         
     def __fire(self):
+        self.__arrow_shot_sound.play()
         proj_pos = pygame.math.Vector2(self._pos.x + self.__image_half_width, self._pos.y + self.__image_half_height)
         
         if self.__moving["left"] == True:
@@ -122,6 +132,7 @@ class Hero(GameObject):
 
 
     def melee_attack(self):
+        self.__sword_attack_sound.play()
         self.__attack_cooldown = cfg_item("hero", "stats", "cooldown")
 
 

@@ -38,6 +38,10 @@ class GamePlay(State):
             self.__background1=pygame.image.load(bg1_image_path).convert_alpha()
             self.__background1_resized = pygame.transform.scale(self.__background1, cfg_item("game", "screen_size")).convert_alpha()
 
+        with resources.path(cfg_item("sounds", "arrow_impact", "path"), cfg_item("sounds", "arrow_impact", "filename")) as sound_path:
+            self.__arrow_impact_sound = pygame.mixer.Sound(sound_path)
+            self.__arrow_impact_sound.set_volume(cfg_item("sounds", "arrow_impact", "volume"))
+
 
     def enter(self):
         self.__players.add(Hero())
@@ -169,7 +173,7 @@ class GamePlay(State):
                     self.__game_over()
 
         for enemy, projectiles in pygame.sprite.groupcollide(self.__enemies, self.__projectiles_allied, False, True).items():
-            # self.__spawn_explosion(enemy.half_size_pos)
+            self.__arrow_impact_sound.play()
             for projectile in projectiles:
                 self.__damagetext.add(DamageText(projectile.damage, enemy.position))
                 enemy.take_damage(projectile.damage)

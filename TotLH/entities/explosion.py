@@ -13,6 +13,10 @@ class Explosion(GameObject):
         rows = cfg_item("projectiles", "enemy", "image", "explosion", "rows")
         cols = cfg_item("projectiles", "enemy", "image", "explosion", "cols")
 
+        with resources.path(cfg_item("sounds", "explosion", "path"), cfg_item("sounds", "explosion", "filename")) as sound_path:
+            self.__explosion_sound = pygame.mixer.Sound(sound_path)
+            self.__explosion_sound.set_volume(cfg_item("sounds", "explosion", "volume"))
+
         with resources.path(cfg_item("projectiles", "enemy", "image", "explosion", "path"), cfg_item("projectiles", "enemy", "image", "explosion", "filename")) as image_path:
             image = pygame.image.load(image_path).convert_alpha()
             self.__flipbook = FlipBook(image_path, rows, cols)
@@ -31,6 +35,7 @@ class Explosion(GameObject):
         pass
 
     def update(self, delta_time):
+        self.__explosion_sound.play()
         self.__current_time += delta_time
         if self.__current_time >= self.__time_per_sequence:
             self.__current_time -= self.__time_per_sequence

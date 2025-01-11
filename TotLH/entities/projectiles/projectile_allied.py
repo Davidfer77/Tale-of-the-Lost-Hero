@@ -45,8 +45,10 @@ class Projectile_allied(Projectile):
                 Projectile_allied.__image_half_height = Projectile_allied.__image_up.get_height()/2
 
 
+
     def __del__(self):
         pass
+
 
     @property
     def image(self):

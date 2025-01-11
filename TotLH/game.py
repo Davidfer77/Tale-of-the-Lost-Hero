@@ -8,6 +8,13 @@ class Game:
 
     def __init__(self):
         pygame.init()
+        pygame.mixer.init(44100, -16, 2, 16)
+
+
+        with resources.path(cfg_item("sounds", "background", "path"), cfg_item("sounds", "background", "filename")) as sound_path:
+            pygame.mixer.music.load(sound_path)
+            pygame.mixer.music.set_volume(cfg_item("sounds", "background", "volume"))
+            pygame.mixer.music.play(-1)
 
         self.__running = False
 

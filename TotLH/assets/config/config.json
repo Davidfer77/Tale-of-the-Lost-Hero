@@ -11,7 +11,6 @@
             "buttons" : {
                 "text_color" : [255, 255, 255],
                 "font" : {
-                    "path" : "",
                     "size" : 40
                 },
                 "story_mode" : {
@@ -46,7 +45,7 @@
             "path" : "TotLH.assets.images",
             "filename" : "background1.png", 
             "enemy_spawn_prob" : 0.005,
-            "maximum_score" : 10,
+            "maximum_score" : 1000,
             "enemy_spawn_weight" : {
                 "skeleton" : 80,
                 "predator" : 20,
@@ -58,7 +57,7 @@
             "path" : "TotLH.assets.images",
             "filename" : "background2.png", 
             "enemy_spawn_prob" : 0.01,
-            "maximum_score" : 10,
+            "maximum_score" : 2000,
             "enemy_spawn_weight" : {
                 "skeleton" : 60,
                 "predator" : 15,
@@ -156,6 +155,33 @@
             }
         }
     },
+    "sounds" : {
+        "background" : {
+            "path" : "TotLH.assets.sounds",
+            "filename" : "background_music.mp3",
+            "volume" : 0.1
+        },
+        "explosion" : {
+            "path" : "TotLH.assets.sounds",
+            "filename" : "explosion.mp3",
+            "volume" : 0.1
+        },
+        "sword_attack" : {
+            "path" : "TotLH.assets.sounds",
+            "filename" : "sword_attack.mp3",
+            "volume" : 0.4
+        },
+        "arrow_shot" : {
+            "path" : "TotLH.assets.sounds",
+            "filename" : "arrow_shot.mp3",
+            "volume" : 0.4
+        },
+        "arrow_impact" : {
+            "path" : "TotLH.assets.sounds",
+            "filename" : "arrow_impact.mp3",
+            "volume" : 0.4
+        }
+    },
     "life_bar" : {
         "config" : {
             "bar_width" : 200,
@@ -190,7 +216,7 @@
             "size" : [75, 100]
         },
         "stats" : {
-            "life" : 250,
+            "life" : 2500000,
             "speed" : 0.25,
             "damage" : 25,
             "cooldown" : 500

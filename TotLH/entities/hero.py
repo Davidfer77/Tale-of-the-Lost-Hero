@@ -121,9 +121,7 @@ class Hero(GameObject):
         self.__arrow_cooldown = cfg_item("projectiles","allied", "stats", "cooldown")
     
 
-        #Creamos el evento
         fire_event = pygame.event.Event(pygame.USEREVENT, event = Events.HERO_FIRES, pos = proj_pos, dir = self.__last_direction, dmg = self.__arrow_damage)
-        #Lanzamos el evento a la cola
         pygame.event.post(fire_event)
 
 

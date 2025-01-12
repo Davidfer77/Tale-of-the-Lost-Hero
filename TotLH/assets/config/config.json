@@ -15,7 +15,7 @@
                 },
                 "story_mode" : {
                     "color" : [50, 200, 50],
-                    "text" : "STORY MODE (SOON)",
+                    "text" : "STORY MODE",
                     "rectangle" : [150, 300, 420, 50]
                 },
                 "survival_mode" : {
@@ -57,7 +57,7 @@
             "path" : "TotLH.assets.images",
             "filename" : "background2.png", 
             "enemy_spawn_prob" : 0.01,
-            "maximum_score" : 2000,
+            "maximum_score" : 1000,
             "enemy_spawn_weight" : {
                 "skeleton" : 60,
                 "predator" : 15,
@@ -216,7 +216,7 @@
             "size" : [75, 100]
         },
         "stats" : {
-            "life" : 2500000,
+            "life" : 300,
             "speed" : 0.25,
             "damage" : 25,
             "cooldown" : 500
@@ -263,7 +263,7 @@
                 "life" : 75,
                 "speed" : 0.05,
                 "damage" : 0,
-                "fire_rate" : 0.05,
+                "fire_rate" : 0.01,
                 "score" : 100,
                 "cooldown" : 1500
             }
@@ -275,7 +275,7 @@
                 "size" : [200, 200]
             },
             "stats" : {
-                "life" : 50,
+                "life" : 5000,
                 "speed" : 0.02,
                 "damage" : 75,
                 "fire_rate" : 0.05,

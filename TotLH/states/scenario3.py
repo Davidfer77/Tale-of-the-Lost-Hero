@@ -59,6 +59,7 @@ class Scenario3(State):
         self.__projectiles_allied.empty()
         self.__projectiles_enemy.empty()
         self.__explosions.empty()
+        self.__scorepoints.empty()
         self.__devil_added = False
 
     def handle_input(self, event):
@@ -147,7 +148,6 @@ class Scenario3(State):
         if self.__devil_added == False:
             enemy_type = EnemyType.Devil
             spawn_pos = pygame.math.Vector2(self.__screen_size[0] / 2 - cfg_item("enemy", "devil", "image", "size")[0] / 2, self.__screen_size[1] / 2 - cfg_item("enemy", "devil", "image", "size")[1] / 2)
-            #spawn_pos = pygame.math.Vector2(0.0 , 0.0)
             enemy = self.__enemy_pool.acquire()
             enemy.init(enemy_type, spawn_pos)
 

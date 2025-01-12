@@ -56,6 +56,7 @@ class Scenario2(State):
         self.__projectiles_allied.empty()
         self.__projectiles_enemy.empty()
         self.__explosions.empty()
+        self.__scorepoints.empty()
 
     def handle_input(self, event):
         if event.type == pygame.KEYDOWN:
